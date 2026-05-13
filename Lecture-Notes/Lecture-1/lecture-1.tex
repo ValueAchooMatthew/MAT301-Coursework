@@ -1,0 +1,308 @@
+\ifdefined\iscombined
+	\lecturetitle{Introduction}
+\else
+\documentclass{article}
+\usepackage{xparse}
+\usepackage{changepage}
+\usepackage{listings}
+\usepackage{amsthm}
+\usepackage{comment}
+\usepackage{amsmath}
+\usepackage{braket}
+\usepackage{amsfonts}
+\usepackage{sectsty}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{mathtools}
+
+\date{
+	\vspace{-.75em}
+	{\large \today}
+}
+
+\title{
+	\vspace*{-1.5em}
+	{\Huge Lecture 1} \\
+	\vspace{-1em}
+	\rule{\textwidth/4}{.01em} \\
+	\vspace{-.25em}
+	{\Large Introduction}
+	\vspace{-.75em}
+}
+
+\author{
+	{\large Matthew Farah}
+}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=blue,
+	citecolor=blue,
+	anchorcolor=blue
+}
+
+\fancyhead{}
+\fancyhead[L]{\today}
+\fancyhead[R]{Lecture 1 - Introduction}
+
+\setlength{\parindent}{0cm}
+
+\newcounter{example}
+\renewcommand{\theexample}{\arabic{example}}
+
+\newcounter{subexample}
+\renewcommand{\thesubexample}{\alph{subexample}}
+
+\newenvironment{example}[1][]{
+	\refstepcounter{example}
+	\setcounter{subexample}{0}
+	\begin{adjustwidth}{1.5em}{}
+	\noindent\textbf{\ifx&#1&Example \theexample:\else Example \theexample \ (#1):\fi}
+	\ignorespaces
+}{
+	\vspace{.5em}
+	\end{adjustwidth}
+}
+
+\newenvironment{solution}{
+	\vspace{.5em}
+	\par
+	\begin{adjustwidth}{1.5em}{}
+	\textbf{{Solution:}}
+	\par
+	\vspace{.5em}
+}{
+	\vspace{1em}
+	\end{adjustwidth}
+}
+
+\newenvironment{subexample}{
+	\setcounter{step}{0}
+	\refstepcounter{subexample}
+	\vspace{1em}\par\noindent
+	\begin{adjustwidth}{1.5em}{}
+	\noindent\textbf{(\thesubexample)}
+	\ignorespaces
+}{
+	\par
+	\vspace{1em}
+	\end{adjustwidth}
+}
+
+\renewenvironment{proof}{
+	\vspace{.5em}\par\noindent
+	\begin{adjustwidth}{1.5em}{}
+	\emph{Proof:}\par\vspace{1em}
+	\setlength{\parindent}{0cm}
+}{
+	\end{adjustwidth}
+}
+
+\newtheorem{theorem}{Theorem}
+
+\renewenvironment{theorem}[1][]{
+	\refstepcounter{theorem}
+	\vspace{1em}\par\noindent
+	\begin{adjustwidth}{1.5em}{}
+	\noindent\textbf{\ifx&#1&Theorem \thetheorem:\else Theorem \thetheorem \ (#1):\fi}
+	\ignorespaces
+}{
+	\vspace{.5em}
+	\end{adjustwidth}
+}
+
+\newtheorem{lemma}{Lemma}
+
+\renewenvironment{lemma}[1][]{
+	\refstepcounter{lemma}
+	\vspace{1em}\par\noindent
+	\begin{adjustwidth}{1.5em}{}
+	\noindent\textbf{\ifx&#1&Lemma \thelemma:\else Lemma \thelemma \ (#1):\fi}
+	\ignorespaces
+}{
+	\vspace{.5em}
+	\end{adjustwidth}
+}
+
+\newtheorem{definition}{Definition}
+
+\renewenvironment{definition}[1][]{
+	\refstepcounter{definition}
+	\vspace{1em}\par\noindent
+	\begin{adjustwidth}{1.5em}{}
+	\noindent\textbf{\ifx&#1&Definition \thedefinition:\else Definition \thedefinition \ (#1):\fi}
+	\ignorespaces
+}{
+	\vspace{.5em}
+	\end{adjustwidth}
+}
+
+\newtheorem{corollary}{Corollary}
+
+\renewenvironment{corollary}[1][]{
+	\refstepcounter{corollary}
+	\vspace{1em}\par\noindent
+	\begin{adjustwidth}{1.5em}{}
+	\noindent\textbf{\ifx&#1&Corollary \thecorollary:\else Corollary \thecorollary \ (#1):\fi}
+	\ignorespaces
+}{
+	\vspace{.5em}
+	\end{adjustwidth}
+}
+
+\newtheorem{proposition}{Proposition}
+
+\renewenvironment{proposition}[1][]{
+	\refstepcounter{proposition}
+	\vspace{1em}\par\noindent
+	\begin{adjustwidth}{1.5em}{}
+	\noindent\textbf{\ifx&#1&Proposition \theproposition:\else Proposition \theproposition \ (#1):\fi}
+	\ignorespaces
+}{
+	\vspace{.5em}
+	\end{adjustwidth}
+}
+
+\newtheorem{remark}{Remark}
+
+\renewenvironment{remark}[1][]{
+	\refstepcounter{remark}
+	\vspace{1em}\par\noindent
+	\begin{adjustwidth}{1.5em}{}
+	\noindent\textbf{\ifx&#1&Remark \theremark:\else Remark \theremark \ (#1):\fi}
+	\ignorespaces
+}{
+	\vspace{.5em}
+	\end{adjustwidth}
+}
+
+\makeatother
+\makeatletter
+
+\newcounter{step}
+\renewcommand{\thestep}{\Roman{step}}
+
+\newenvironment{step}{
+	\refstepcounter{step}
+	\vspace{1em}\par\noindent
+	\ignorespaces\noindent\textbf{(\thestep)}
+	\ignorespaces
+}{
+	\par
+}
+
+\sectionfont{\fontsize{12}{12}\bfseries}
+\subsectionfont{\fontsize{10}{12}\normalfont}
+\subsubsectionfont{\fontsize{10}{12}\normalfont}
+
+\begin{document}
+
+\maketitle
+\pagestyle{fancy}
+
+\fi
+
+\begin{itemize}
+	\item Notes about the course:
+	\begin{itemize}
+		\item 4 problems (5\% each).
+		\item Weekly quizzes (10\% total).
+		\item 2 midterms (15\% each).
+		\item Exam (40\% total).
+	\end{itemize}
+	\item Algebra is concerned with studying the implications that certain collections of axioms have on solving problems.
+\end{itemize}
+
+\begin{definition}
+	Let $G$ be a set. A binary operator $*$ is a function $*: G \times G \to G$.
+\end{definition}
+
+\begin{definition}
+	Let $G$ be a set. $G$ is a group under a binary operator $*$ if $(G, *)$ satisfies all 3 of the following criteria:
+
+	\begin{enumerate}
+		\item Associativity:
+		\begin{itemize}
+			\item $\forall a, b, c \in G; \ (a * b) * c = a * (b * c)$.
+		\end{itemize}
+		\item Existence of an identity element:
+		\begin{itemize}
+			\item $\exists e \in G; \ \forall a \in G; \ a * e = e * a = a$.
+		\end{itemize}
+		\item Existence of inverses:
+		\begin{itemize}
+			\item $\forall a \in G; \ \exists b \in G; \ a * b = b * a = e$.
+		\end{itemize}
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	A group $(G, *)$ is called abelian if, in addition to satisfying the group axioms, $*$ satisfies the commutativity of $*$ on $G$:
+
+	\begin{gather*}
+		\forall a, b \in G; \ a * b = b * a
+	\end{gather*}
+\end{definition}
+
+\begin{example}
+	Which of the following are groups?
+\end{example}
+
+\begin{subexample}
+	$\mathbb{Z}$ under addition?
+\end{subexample}
+
+\begin{solution}
+	Yes!
+\end{solution}
+
+\begin{subexample}
+	$\mathbb{N}$ under addition?
+\end{subexample}
+
+\begin{solution}
+	No! There is no inverse for any element except $0$ if you let $0 \in \mathbb{N}$.
+\end{solution}
+
+\begin{subexample}
+	$\mathbb{Z}$ under multiplication?
+\end{subexample}
+
+\begin{solution}
+	No! Many elements, such as $2$, do not have a multiplicative inverse in $\mathbb{Z}$.
+\end{solution}
+
+\begin{subexample}
+	$\mathbb{Z}$ under subtraction?
+\end{subexample}
+
+\begin{solution}
+	No! Subtraction isn't associative. For example:
+
+	\begin{align*}
+		(1 - 2) - 3 = -4 \ne 2 = 1 - (2 - 3)
+	\end{align*}
+\end{solution}
+
+\begin{example}
+	Do any of the following sets under addition constitute a group?
+
+	\begin{align*}
+		\{1, 2, 3\}, \quad \{0, 1, 2, 3\}, \quad \{-3, -2, -1, 0, 1, 2, 3\}
+	\end{align*}
+\end{example}
+
+\begin{solution}
+	No, since none of them are closed under addition. For example, $1 + 3 = 4$ does not belong to any of the sets.
+\end{solution}
+
+\ifdefined\iscombined
+	\newpage
+\else
+	\end{document}
+\fi
