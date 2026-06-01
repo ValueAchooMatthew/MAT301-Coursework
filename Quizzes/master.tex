@@ -1,0 +1,153 @@
+\def\iscombined{}
+\documentclass{article}
+\usepackage{circuitikz}
+\usepackage{changepage}
+\usepackage{braket}
+\usepackage{bm}
+\usepackage{diagbox}
+\usepackage{listings}
+\usepackage{amsthm}
+\usepackage{comment}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{sectsty}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{tocloft}
+
+\date{
+	\vspace{-.75em}
+	{\large \today}
+}
+
+\title{
+	\vspace*{-1.5em}
+	{\Huge MAT301} \\
+	\vspace{-1em}
+	\rule{\textwidth/2}{.01em} \\
+	\vspace{-.25em}
+	{\Large Completed Weekly Quizzes}
+	\vspace{-.75em}
+}
+
+\author{
+	{\large Matthew Farah}
+}
+
+\newcommand{\quiz}{
+	\refstepcounter{section}
+	\addcontentsline{toc}{section}{\protect\numberline{Quiz \thesection}}
+	\vspace*{.1em}
+	\begin{center}
+		{\huge Quiz \thesection} \\
+		\vspace{-.5em}
+		\rule{\textwidth/4}{.01em} \\
+		\vspace{.5em}
+	\end{center}
+	\vspace{1.5em}
+	\setcounter{theorem}{0}
+	\setcounter{question}{0}
+	\setcounter{subquestion}{0}
+	\setcounter{step}{0}
+}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=blue,
+	citecolor=blue,
+	anchorcolor=blue
+}
+
+\fancyhead{}
+\fancyhead[L]{\today}
+\fancyhead[R]{All Quizzes for MAT301}
+
+\setlength\cftsecnumwidth{2em}
+\setlength{\parindent}{0cm}
+
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\tikzset{vertex/.style = {shape = circle, draw, minimum size = 5em}}
+\tikzset{edge/.style = {->,> = latex'}}
+
+\newcounter{question}
+\renewcommand{\thequestion}{\arabic{question}}
+
+\newenvironment{question}{
+	\refstepcounter{question}
+	\begin{adjustwidth}{1.5em}{}
+	\noindent\textbf{\thequestion.)}
+	\ignorespaces
+}{
+	\vspace{.5em}
+	\end{adjustwidth}
+}
+
+\newcounter{subquestion}
+\renewcommand{\thesubquestion}{\alph{subquestion}}
+
+\newenvironment{subquestion}{
+	\setcounter{step}{0}
+	\refstepcounter{subquestion}
+	\vspace{1em}\par\noindent
+	\begin{adjustwidth}{1.5em}{}
+	\noindent\textbf{(\thesubquestion)}
+	\ignorespaces
+}{
+	\par
+	\vspace{1em}
+	\end{adjustwidth}
+}
+
+\newenvironment{solution}{
+	\vspace{.5em}
+	\par
+	\begin{adjustwidth}{1.5em}{}
+	\textbf{{Solution:}}
+	\par
+	\vspace{.5em}
+}{
+	\vspace{1em}
+	\end{adjustwidth}
+}
+
+\newcounter{step}
+\renewcommand{\thestep}{\Roman{step}}
+
+\newenvironment{step}{
+	\refstepcounter{step}
+	\vspace{1em}\par\noindent
+	\ignorespaces\noindent\textbf{(\thestep)}
+	\ignorespaces
+}{
+	\par
+	\vspace{1.5em}
+}
+
+
+\sectionfont{\fontsize{12}{12}\bfseries}
+\subsectionfont{\fontsize{10}{12}\normalfont}
+\subsubsectionfont{\fontsize{10}{12}\normalfont}
+
+\begin{document}
+
+\maketitle
+\pagestyle{fancy}
+
+\tableofcontents
+\newpage
+
+\input{./includes.tex}
+
+\end{document}
+
