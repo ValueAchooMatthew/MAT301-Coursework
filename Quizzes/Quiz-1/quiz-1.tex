@@ -1,0 +1,224 @@
+\ifdefined\iscombined
+	\quiz
+\else
+\documentclass{article}
+\usepackage{xparse}
+\usepackage{changepage}
+\usepackage{listings}
+\usepackage{amsthm}
+\usepackage{comment}
+\usepackage{amsmath}
+\usepackage{braket}
+\usepackage{amsfonts}
+\usepackage{sectsty}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{tabularx}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+
+\date{
+	\vspace{-.75em}
+	{\large \today}
+}
+
+\title{
+	\vspace*{-1.5em}
+	{\Huge Quiz 1} \\
+	\vspace{-1em}
+	\rule{\textwidth/4}{.01em} \\
+	\vspace{-.75em}
+}
+
+\author{
+	{\large Matthew Farah}
+}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=blue,
+	citecolor=blue,
+	anchorcolor=blue
+}
+
+\fancyhead{}
+\fancyhead[L]{\today}
+\fancyhead[R]{Quiz 1}
+
+\setlength{\parindent}{0cm}
+
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\tikzset{vertex/.style = {shape = circle, draw, minimum size = 5em}}
+\tikzset{edge/.style = {->,> = latex'}}
+
+\newcounter{question}
+\renewcommand{\thequestion}{\arabic{question}}
+
+\newenvironment{question}{
+	\refstepcounter{question}
+	\begin{adjustwidth}{1.5em}{}
+	\noindent\textbf{\thequestion.)}
+	\ignorespaces
+}{
+	\vspace{.5em}
+	\end{adjustwidth}
+}
+
+\newcounter{subquestion}
+\renewcommand{\thesubquestion}{\alph{subquestion}}
+
+\newenvironment{subquestion}{
+	\setcounter{step}{0}
+	\refstepcounter{subquestion}
+	\vspace{1em}\par\noindent
+	\begin{adjustwidth}{1.5em}{}
+	\noindent\textbf{(\thesubquestion)}
+	\ignorespaces
+}{
+	\par
+	\vspace{1em}
+	\end{adjustwidth}
+}
+
+\newenvironment{solution}{
+	\vspace{.5em}
+	\par
+	\begin{adjustwidth}{1.5em}{}
+	\textbf{{Solution:}}
+	\par
+	\vspace{.5em}
+}{
+	\vspace{1em}
+	\end{adjustwidth}
+}
+
+\newcounter{step}
+\renewcommand{\thestep}{\Roman{step}}
+
+\newenvironment{step}{
+	\refstepcounter{step}
+	\vspace{1em}\par\noindent
+	\ignorespaces\noindent\textbf{(\thestep)}
+	\ignorespaces
+}{
+	\par
+	\vspace{1.5em}
+}
+
+
+\sectionfont{\fontsize{12}{12}\bfseries}
+\subsectionfont{\fontsize{10}{12}\normalfont}
+\subsubsectionfont{\fontsize{10}{12}\normalfont}
+
+\begin{document}
+
+\maketitle
+\pagestyle{fancy}
+
+\fi
+
+\begin{question}
+	Consider the following permutations in $S_7$:
+
+	\begin{align*}
+		\sigma &= (13)(256) \\
+		\tau &= (417)(235) \\
+	\end{align*}
+
+	What is the cycle type of $\sigma$ and $\tau$?
+\end{question}
+
+\begin{solution}
+	We know that both permutations belong in $S_7$, and so there are $7$
+	elements to be permuted. We also know that the cycle type of a
+	permutation is a list representing the lengths of each of the
+	permutation's cycles, placed in descending order. Using this, we can:
+
+	\begin{step}
+		Find the cycle type of $\sigma$.
+	\end{step}
+
+	$\sigma$ has two explicitly written cycles: $(13)$ and $(256)$ which are of lengths 2 and 3 respectively. Since there are only 5 elements expressed in the cycle notation of $\sigma$, that mean that the other 2 elements of $S_7$, namely 4 and 7, were omitted for being fixed points. Because fixed points evidently have cycle lengths of 1, this leads us to conclude that the cycle type of $\sigma$ must be given by:
+
+	\begin{gather*}
+		(3, 2, 1, 1)
+	\end{gather*}
+
+	\begin{step}
+		Find the cycle type of $\tau$.
+	\end{step}
+
+	By similar logic, $\tau$ has two cycles of length 3 each given by the notation. Since that makes for 6 elements total, the unaccounted for element, 6, must be fixed. Hence, the cycle type of $\tau$ is:
+
+	\begin{gather*}
+		(3, 3, 1)
+	\end{gather*}
+\end{solution}
+
+\begin{question}
+	How many elements are there in $A_4 \times D_4$.
+\end{question}
+
+%TODO: Elaborate
+\begin{solution}
+
+	\begin{align*}
+		|A_4 \times D_4| &= \left| A_4 \right| \left| D_4 \right| \\
+		&= \left(\frac{4!}{2}\right)(8) \\
+		&= (12)(8) \\
+		&= 96
+	\end{align*}
+\end{solution}
+
+\begin{question}
+	Consider the following two permutations:
+
+	\begin{align*}
+		\alpha &= (12)(34)(56) \\
+		\beta &= (123)(456) \\
+	\end{align*}
+
+	Which, if possible to deduce, of $\alpha$ and $\beta$ are even or odd?
+\end{question}
+
+%FIX: Write up proper solution
+\begin{solution}
+\end{solution}
+
+\begin{question}
+	Which of the following sets of permutations belong to the group $D_5$? Hint: Try drawing a pentagon with vertices labelled clockwise 1 through 5. You are looking for adjacency permutations of this pentagon.
+\end{question}
+
+\begin{subquestion}
+	$\alpha = (12)(34)$.
+\end{subquestion}
+
+\begin{solution}
+	As given by the hint, for $\alpha$ to belong to $D_5$, after permuting the following pentagon:
+
+	\vspace{1em}
+
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}[>=latex']
+			\node[circle, draw] 
+			\node[circle, draw] (B) at (3,2) {Node B};
+		\end{tikzpicture}
+	\end{figure}
+
+	\vspace{1em}
+
+\end{solution}
+
+\ifdefined\iscombined
+	\newpage
+\else
+	\end{document}
+\fi
