@@ -1,0 +1,484 @@
+\ifdefined\iscombined
+	\topic{The Group Axioms}
+\else
+\documentclass{article}
+\usepackage{xparse}
+\usepackage{tabularx}
+\usepackage{changepage}
+\usepackage{listings}
+\usepackage{amsthm}
+\usepackage{comment}
+\usepackage{amsmath}
+\usepackage{braket}
+\usepackage{amsfonts}
+\usepackage{sectsty}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{mathtools}
+
+\date{
+	\vspace{-.75em}
+	{\large \today}
+}
+
+\title{
+	\vspace*{-1.5em}
+	{\Huge Topic 1} \\
+	\vspace{-1em}
+	\rule{\textwidth/4}{.01em} \\
+	\vspace{-.25em}
+	{\Large The Group Axioms}
+	\vspace{-.75em}
+}
+
+\author{
+	{\large Matthew Farah}
+}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=blue,
+	citecolor=blue,
+	anchorcolor=blue
+}
+
+\fancyhead{}
+\fancyhead[L]{\today}
+\fancyhead[R]{Topic 1 - The Group Axioms}
+
+\setlength{\parindent}{0cm}
+
+\newenvironment{solution}{
+	\vspace{.5em}
+	\par
+	\begin{adjustwidth}{1.5em}{}
+	\textbf{{Solution:}}
+	\par
+	\vspace{.5em}
+}{
+	\vspace{1em}
+	\end{adjustwidth}
+	\setcounter{step}{0}
+}
+
+\makeatother
+\makeatletter
+
+\newcounter{step}
+\renewcommand{\thestep}{\Roman{step}}
+
+\newenvironment{step}{
+	\refstepcounter{step}
+	\vspace{1em}\par\noindent
+	\ignorespaces\noindent\textbf{(\thestep)}
+	\ignorespaces
+}{
+	\par
+	\vspace{1.5em}
+}
+
+\newcounter{definition}
+\renewcommand{\thedefinition}{\arabic{definition}}
+
+\newenvironment{definition}[1][]{
+	\refstepcounter{definition}
+	\vspace{1em}\par\noindent
+	\begin{adjustwidth}{1.5em}{}
+	\noindent\textbf{\ifx&#1&Definition \thedefinition:\else Definition \thedefinition \ (#1):\fi}
+	\ignorespaces
+}{
+	\vspace{.5em}
+	\end{adjustwidth}
+}
+
+
+\newcounter{notation}
+\renewcommand{\thenotation}{\arabic{notation}}
+
+\newenvironment{notation}{
+	\refstepcounter{notation}
+	\vspace{1em}\par\noindent
+	\begin{adjustwidth}{1.5em}{}
+	\noindent\textbf{Notation:}
+	\ignorespaces
+}{
+	\vspace{.5em}
+	\end{adjustwidth}
+}
+
+\newtheorem{theorem}{Theorem}
+
+\renewenvironment{theorem}[1][]{
+	\refstepcounter{theorem}
+	\vspace{1em}\par\noindent
+	\begin{adjustwidth}{1.5em}{}
+	\noindent\textbf{\ifx&#1&Theorem \thetheorem:\else Theorem \thetheorem \ (#1):\fi}
+	\ignorespaces
+}{
+	\vspace{.5em}
+	\end{adjustwidth}
+}
+
+\newcounter{exercise}
+\renewcommand{\theexercise}{\arabic{exercise}}
+
+\newenvironment{exercise}[1][]{
+	\refstepcounter{exercise}
+	\begin{adjustwidth}{1.5em}{}
+	\noindent\textbf{Exercise \theexercise:}
+	\ignorespaces
+}{
+	\vspace{.5em}
+	\end{adjustwidth}
+}
+
+\newcounter{subexercise}
+\renewcommand{\thesubexercise}{\alph{subexercise}}
+
+\newenvironment{subexercise}{
+	\setcounter{step}{0}
+	\refstepcounter{subexercise}
+	\vspace{1em}\par\noindent
+	\begin{adjustwidth}{1.5em}{}
+	\noindent\textbf{(\thesubexercise)}
+	\ignorespaces
+}{
+	\par
+	\vspace{1em}
+	\end{adjustwidth}
+}
+
+\sectionfont{\fontsize{12}{12}\bfseries}
+\subsectionfont{\fontsize{10}{12}\normalfont}
+\subsubsectionfont{\fontsize{10}{12}\normalfont}
+
+\begin{document}
+
+\maketitle
+\pagestyle{fancy}
+
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\fi
+
+\begin{definition}
+	Let $G$ be a set. A binary operation $\ast$ is a function $\ast\colon G \times G \rightarrow G$.
+\end{definition}
+
+\begin{notation}
+	$x \ast y \coloneq \ast(x, y)$.
+\end{notation}
+
+\begin{definition}
+	Let $G$ be a set and let $\ast$ be a binary operator on $G$. $\left(G, \ast \right)$ is said to be a group if the following three criteria are all met.
+	\begin{enumerate}
+		\item Associativity.
+		\begin{itemize}
+			\item $\forall a, b, c \in G, \left(a \ast b \right) \ast c = a \ast \left( b \ast c \right)$.
+		\end{itemize}
+		\item Existence of an identity for $\ast$ in $G$.
+		\begin{itemize}
+			\item $\exists e \in G$ such that $\forall a \in G, a \ast e = e \ast a = a$.
+		\end{itemize}
+		\item Existence of inverses for every element in $G$.
+		\begin{itemize}
+			\item $\forall a \in G, \exists b \in G$ such that $a \ast b = b \ast a = a$.
+		\end{itemize}
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	Let $(G, \ast)$ be a group. $\left(G, \ast \right)$ is abelian if, in addition to the group axioms, it satisfies commutativity:
+	\begin{itemize}
+		\item $\forall a, b \in G, a \ast b = b \ast a$.
+	\end{itemize}
+\end{definition}
+
+\begin{exercise}
+	Consider the operation of subtraction on $\mathbb{Z}$. Show by example that this operation is neither associative nor commutative. Additionally, show that there is no identity element for subtraction.
+\end{exercise}
+
+\begin{solution}
+	\begin{step}
+		Show subtraction isn't associative on $\mathbb{Z}$.
+	\end{step}
+
+	Since: \\
+
+	\begin{align*}
+		(1 - 2) - 3 = -1 - 3 &= -4 \\
+		&\neq 2 = 1 - (-1) = 1 - (2 - 3) \\
+	\end{align*}
+
+	and $1, 2, 3 \in \mathbb{Z}$, subtraction isn't associative on $\mathbb{Z}$.
+
+	\begin{step}
+		Show subtraction isn't associative on $\mathbb{Z}$.
+	\end{step}
+
+	Since:
+
+	\begin{align*}
+		0 - 1 &= -1 \\
+		&\neq 1 = 1 - 0 \\
+	\end{align*}
+
+	and $0, 1 \in \mathbb{Z}$, subtraction isn't commutative on $\mathbb{Z}$.
+
+	\begin{step}
+		Show subtraction doesn't have an identity element in $\mathbb{Z}$.
+	\end{step}
+
+	Let's assume, for the purposes of deriving a contradiction, that subtraction does have an identity element in $\mathbb{Z}$. Then there must exist some $e \in \mathbb{Z}$ such that:
+
+	\begin{gather*}
+		x - e = e - x = x \\
+	\end{gather*}
+
+	for all $x \in \mathbb{Z}$. However, notice that:
+
+	%FIX: Formatting
+	\begin{align*}
+		&1 - e = e - 1 \\
+		&\implies 2e = 2 \\
+		&\implies e = 1 \\
+	\end{align*}
+
+	However:
+
+	\begin{align*}
+		&0 - e = e - 0 \\
+		&\implies 2e = 0 \\
+		&\implies e = 0 \\
+	\end{align*}
+
+	Hence, $e$ must be equal to both 0 and 1 to be an identity element for subtraction over $\mathbb{Z}$, which clearly isn't possible. Therefore, $e$ cannot exist and thus no identity element for subtraction over $\mathbb{Z}$ exists.
+\end{solution}
+
+\begin{exercise}
+	Let $\mathbb{R}_{> 0}$ denote the set of positive real numbers, and let $\wedge$ denote the exponentiation operation on $\mathbb{R}$; namely, $a \wedge b = a^{b}$. Is $\wedge$ associative? Commutative? Does it have an identity element?
+\end{exercise}
+
+\begin{solution}
+	\begin{step}
+		Prove or disprove that $\wedge$ is associative over $\mathbb{R}_{> 0}$.
+	\end{step}
+
+	$\wedge$ is \underline{not} associative over $\mathbb{R}_{> 0}$, since:
+
+	\begin{align*}
+		\left( 2 \wedge 3 \right) \wedge 2 = 2^3 \wedge 2 = 2^6 &= 64 \\
+		&\neq 512 = 2^9 = 2 \wedge 3^2 = 2 \wedge (3 \wedge 2) \\
+	\end{align*}
+
+	and $2, 3 \in \mathbb{R}_{> 0}$.
+
+	\begin{step}
+		Prove or disprove that $\wedge$ is commutative over $\mathbb{R}_{> 0}$.
+	\end{step}
+
+	$\wedge$ is \underline{not} commutative over $\mathbb{R}_{> 0}$, since:
+
+	\begin{align*}
+		1 \wedge 2 = 1^2 &= 1 \\
+		&= 2 = 2^1 = 2 \wedge 1 \\
+	\end{align*}
+
+	and $1, 2 \in \mathbb{R}_{> 0}$.
+
+	\begin{step}
+		Prove or disprove the existence of an identity element for $\wedge$ over $\mathbb{R}_{> 0}$.
+	\end{step}
+
+	$\wedge$ does not have an identity element in $\mathbb{R}_{> 0}$. To prove this, let's assume for the purposes of deriving a contradiction that such an element $e \in \mathbb{R}_{> 0}$ did exist. Then for arbitrary $a \in \mathbb{R}_{> 0}$, we would have that:
+
+	\begin{align*}
+		a \wedge e &= a \\
+	\end{align*}
+
+	Implying $a^{e} = a$ and thus meaning $e$ must be 1. However, $e$ would also have to satisfy:
+
+	\begin{align*}
+		e \wedge a = a \\
+	\end{align*}
+
+	to be a valid identity element. However, the equation above implies $e^{a} = a$ and since $e$ was determined to be 1 earlier, we can would have to conclude that:
+
+	\begin{align*}
+		1^{a} = a \\
+	\end{align*}
+
+	Which clearly isn't true for all $a \neq 1$. Thus, our assumption that $e$ was an identity element for $\wedge$ over $\mathbb{R}_{> 0}$ couldn't have been correct, and so we must conclude no identity element for $\mathbb{R}_{> 0}$ under $\wedge$ exists at all.
+\end{solution}
+
+\begin{notation}
+	$M_n(\mathbb{R})$ denotes the set of all $n \times n$ matrices with only real entries.
+\end{notation}
+
+\begin{exercise}
+	Prove that matrix multiplication is associative, and give an example showing that matrix multiplication is not commutative.
+\end{exercise}
+
+\begin{solution}
+	\begin{step}
+		Prove that matrix multiplication is associative.
+	\end{step}
+
+	Fix some $n \in \mathbb{N}$ and let $A, B, C \in M(\mathbb{R})$. Since:
+
+	\begin{align*}
+		\left(\left( AB \right) C \right) &= \sum_{k = 1}^{n}\left( AB \right)_{ik}C_{kj} \\
+		&= \sum_{k = 1}^{n}\sum_{l = 1}^{n}A_{il}B_{lk}C_{kj} \\
+		&= \sum_{l = 1}^{n}A_{il}\left( BC \right)_{lj} \\
+		&= \left(A \left( BC \right) \right)_{ij} \\
+	\end{align*}
+
+	Thus, since $\left(\left( AB \right) C \right)_{ij} = \left( A \left( BC \right) \right)_{ij}$, $\left( AB \right) C = A \left( BC \right)$ and therefore matrix multiplication is associative $M_{n}(\mathbb{R})$.
+
+	\begin{step}
+		Show matrix multiplication isn't commutative.
+	\end{step}
+
+	Since, $\begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}, \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix} \in M_2(\mathbb{R})$, but:
+
+	\begin{align*}
+		\begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix} \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix} &= \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix} \\
+		&\neq \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix} = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix} \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix} \\
+	\end{align*}
+
+	Matrix multiplication isn't generally commutative on $M_{n}(\mathbb{R})$.
+\end{solution}
+
+\begin{theorem}
+	Let $A \in M_{n}(\mathbb{R})$. $A$ is invertible if and only if $det(A) \neq 0$.
+\end{theorem}
+
+%TODO: Add proof
+
+\begin{exercise}
+	\begin{gather*}
+		\begin{pmatrix} 2 & 1 & 1 \\ 5 & 3 & 1 \\ 3 & 2 & 1 \end{pmatrix}, \begin{pmatrix} 2 & 1 & -1 \\ 5 & 3 & 1 \\ 3 & 2 & 2 \end{pmatrix}
+	\end{gather*}
+\end{exercise}
+
+\begin{solution}
+
+	\begin{step}
+		Check if the first matrix is invertible.
+	\end{step}
+
+	We know the first matrix is invertible if its determinant is 0. Since:
+
+	\begin{align*}
+		\begin{vmatrix} 2 & 1 & 1 \\ 5 & 3 & 1 \\ 3 & 2 & 1 \end{vmatrix} &= 2 \begin{vmatrix} 3 & 1 \\ 2 & 1 \end{vmatrix} - \begin{vmatrix} 5 & 1 \\ 3 & 1 \end{vmatrix} + (-1) \begin{vmatrix} 5 & 3 \\ 3 & 2 \end{vmatrix} \\
+		&= 2(3 - 2) - (5 - 3) - (5(2) - 2(3)) \\
+		&= 2(1) - 2 - 1 \\
+		&= -1 \\
+	\end{align*}
+
+	The matrix is therefore invertible.
+
+	\begin{step}
+		Check if the second matrix is invertible.
+	\end{step}
+
+	Since:
+
+	\begin{align*}
+		\begin{vmatrix} 2 & 1 & -1 \\ 5 & 3 & 1 \\ 3 & 2 & 2 \end{vmatrix} &= 2\begin{vmatrix} 3 & 1 \\ 2 & 2 \end{vmatrix} - \begin{vmatrix} 5 & 1 \\ 3 & 2 \end{vmatrix} - \begin{vmatrix} 5 & 3 \\ 3 & 2 \end{vmatrix} \\
+		&= 2\left( 6 - 2 \right) - \left( 10 - 3 \right) - \left( 10 - 9 \right) \\
+		&= 8 - 7 - 1 \\
+		&= 0 \\
+	\end{align*}
+
+	The matrix is therefore not invertible.
+\end{solution}
+
+\begin{definition}
+	The set of all $n \times n$, invertible matrices is called the general linear group of degree $n$.
+\end{definition}
+
+\begin{notation}
+	$GL_n(\mathbb{R})$ denotes the general linear group of degree $n$ with only real entries.
+	\begin{itemize}
+		\item $GL_{n}(\mathbb{R}) \coloneq \set{A \in M_n(\mathbb{R}) \colon A \; \text{is invertible}}$.
+	\end{itemize}
+\end{notation}
+
+\begin{notation}
+	$\mathbb{Z}_{n}$ denotes the set of all integers modulo $n$.
+	\begin{itemize}
+		\item $\mathbb{Z}_{n} \coloneq \set{0, 1, \ldots, n - 1}$.
+	\end{itemize}
+\end{notation}
+
+%FIX: Spacing
+\begin{definition}
+	$u \in \mathbb{Z}_{n}$ is called a unit modulo $n$ if there exists some $v \in \mathbb{Z}_{n}$ such that $(uv) \mod n = 1$.
+\end{definition}
+
+\begin{notation}
+	$\mathbb{Z}^{\times}_{n}$ is the set of all units modulo $n$.
+\end{notation}
+
+\begin{exercise}
+	Write out the addition and multiplication tables for $\mathbb{Z}_{10}$. List all elements of $\mathbb{Z}^{\times}_{10}$.
+\end{exercise}
+
+\begin{solution}
+	\begin{step}
+		Write out the addition table of $\mathbb{Z}_{10}$.
+	\end{step}
+
+	\vspace{1em}
+
+	\begin{tabularx}{\linewidth}{Y | Y Y Y Y Y Y Y Y Y Y}
+		$+$ & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+		\hline
+		0 & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+		1 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 0 \\
+		2 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 0 & 1 \\
+		3 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 0 & 1 & 2 \\
+		4 & 4 & 5 & 6 & 7 & 8 & 9 & 0 & 1 & 2 & 3 \\
+		5 & 5 & 6 & 7 & 8 & 9 & 0 & 1 & 2 & 3 & 4 \\
+		6 & 6 & 7 & 8 & 9 & 0 & 1 & 2 & 3 & 4 & 5 \\
+		7 & 7 & 8 & 9 & 0 & 1 & 2 & 3 & 4 & 5 & 6 \\
+		8 & 8 & 9 & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+		9 & 9 & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+	\end{tabularx}
+
+	\vspace{1em}
+
+	\begin{step}
+		Write out the multiplication table of $\mathbb{Z}_{10}$.
+	\end{step}
+
+\end{solution}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\ifdefined\iscombined
+	\newpage
+\else
+	\end{document}
+\fi

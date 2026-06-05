@@ -1,0 +1,232 @@
+\ifdefined\iscombined
+	\problemset{Problem Set 2}
+\else
+\documentclass{article}
+\usepackage{xparse}
+\usepackage{tabularx}
+\usepackage{changepage}
+\usepackage{listings}
+\usepackage{amsthm}
+\usepackage{comment}
+\usepackage{amsmath}
+\usepackage{braket}
+\usepackage{amsfonts}
+\usepackage{sectsty}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{mathtools}
+
+\date{
+	\vspace{-.75em}
+	{\large \today}
+}
+
+\title{
+	\vspace*{-1.5em}
+	{\Huge Problem Set 2} \\
+	\vspace{-1em}
+	\rule{\textwidth/2}{.01em} \\
+	\vspace{-.75em}
+}
+
+\author{
+	{\large Matthew Farah}
+}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=blue,
+	citecolor=blue,
+	anchorcolor=blue
+}
+
+\fancyhead{}
+\fancyhead[L]{\today}
+\fancyhead[R]{Problem Set 2}
+
+\setlength{\parindent}{0cm}
+
+\newenvironment{solution}{
+	\vspace{.5em}
+	\par
+	\begin{adjustwidth}{1.5em}{}
+	\textbf{{Solution:}}
+	\par
+	\vspace{.5em}
+}{
+	\vspace{1em}
+	\end{adjustwidth}
+	\setcounter{step}{0}
+}
+
+\makeatother
+\makeatletter
+
+\newcounter{step}
+\renewcommand{\thestep}{\Roman{step}}
+
+\newenvironment{step}{
+	\refstepcounter{step}
+	\vspace{1em}\par\noindent
+	\ignorespaces\noindent\textbf{(\thestep)}
+	\ignorespaces
+}{
+	\par
+	\vspace{1.5em}
+}
+
+\newcounter{problem}
+\renewcommand{\theproblem}{\arabic{problem}}
+
+\newenvironment{problem}[1][]{
+	\newpage
+	\refstepcounter{problem}
+	\begin{adjustwidth}{1.5em}{}
+	\noindent\textbf{Problem \theproblem: }\noindent\textit{#1}
+	\par
+	\phantomsection
+	\addcontentsline{toc}{section}{\protect{\large{Problem \theproblem}}}
+}{
+	\vspace{.5em}
+	\end{adjustwidth}
+}
+
+
+\newcounter{subproblem}
+\renewcommand{\thesubproblem}{\alph{subproblem}}
+
+\newenvironment{subproblem}{
+	\setcounter{step}{0}
+	\refstepcounter{subproblem}
+	\vspace{1em}\par\noindent
+	\phantomsection
+	\addcontentsline{toc}{subsection}{\protect{\large{(\thesubproblem)}}}
+	\begin{adjustwidth}{1.5em}{}
+	\noindent{(\thesubproblem) }\ignorespaces
+}{
+	\par
+	\vspace{1em}
+	\end{adjustwidth}
+}
+
+%FIX: If I have time
+\newcommand{\supp}[1][]{\text{supp}(#1)}
+
+\sectionfont{\fontsize{12}{12}\bfseries}
+\subsectionfont{\fontsize{10}{12}\normalfont}
+\subsubsectionfont{\fontsize{10}{12}\normalfont}
+
+\begin{document}
+
+\maketitle
+\pagestyle{fancy}
+
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\tableofcontents
+
+\fi
+
+
+\begin{problem}[The centralizer of an element.]
+	Let G be a group and let and let $a \in G$. The centralizer of $a$ is the set of all elements that commute with $a$:
+
+	\begin{gather*}
+		C(a) \coloneq \set{g \in G \colon ga = ag}
+	\end{gather*}
+\end{problem}
+
+%FIX: (QUESTION 1.A)
+% PROBABLY DONT NEED TO USE PROPOSITION 2.6.
+%So ass
+
+\begin{subproblem}
+	In the group $S_5$, let $\sigma = (135)$. List all the elements of the centralizer $C(\sigma)$.
+\end{subproblem}
+
+\begin{solution}
+	To find all elements in the centralizer of $\sigma$, we must find all elements, $\tau \in S_5$ such that $\sigma\tau = \tau\sigma$. \\
+
+	Helping us in that endeavour is Proposition 2.6., which states that if $\tau$ satisfies $\supp[\sigma] \cap \supp[\tau] = \emptyset$, then $\tau$ and $\sigma$ commute. Clearly, $\sigma$ permutes 1, 3, and 5 while leaving 2 and 4 fixed. So, by definition of the support, $\supp[\sigma] = \set{1, 3, 5}$. Therefore, any $\tau$ satisfying $\supp[\tau] \subseteq \set{2, 4}$ must commute with $\sigma$. Evidently, there are only two such $\tau$ and so we can conclude that at least:
+
+	\begin{gather*}
+		\tau = (2, 4), \; \tau = () \\
+	\end{gather*}
+
+	must permute with $\sigma$ and so belong to the centralizer $C(\sigma)$.
+\end{solution}
+
+\begin{subproblem}
+	Prove that $C(a) \le G$ for all $a \in G$.
+\end{subproblem}
+
+\begin{solution}
+	First, let $a \in G$ be arbitrary. To prove that $C(a) \le G$, we must show that $C(a)$ is a subgroup of $G$, which we can do by the one-line subgroup test! \\
+
+	The one line subgroup test states that if $xy^{-1} \in C(a)$ for all $x, y \in C(a)$, then $C(a)$ must be a subgroup of $G$. So, to that end, letting $x, y \in G$ be arbitrary, I will now proceed to show that $(xy^{-1})a = a(xy^{-1})$, hence meaning that $xy^{-1} \in C(a)$ and concluding the proof. \\
+
+	By definition of $C(a)$, we know that $x, y \in a$ implies that $xa = ax$ and $ya = ay$. We also know, since $G$ is a group and $C(a)$ is clearly a subset of $G$, that $y$ must have an inverse in $G$. Letting $y^{-1} \in G$ be y's inverse, we can see that:
+
+	\begin{align*}
+		y^{-1}a &= y^{-1}(a(1)) &&\text{(By definition of the identity)} \\
+		&= y^{-1}(a(yy^{-1}) &&\text{(By definition of inverses)} \\
+		&= y^{-1}((ay)y^{-1}) &&\text{(By associativity)} \\
+		&= (y^{-1}(ay))y^{-1} &&\text{(By associativity)} \\
+		&= (y^{-1}(ya))y^{-1} &&\text{(Since $y \in C(a)$)} \\
+		&= ((y^{-1}y)a)y^{-1} &&\text{(By associativity)} \\
+		&= ((1)a)y^{-1}y^{-1} &&\text{(By definition of inverses)} \\
+		&= ay^{-1} &&\text{(By definition of the identity)} \\
+	\end{align*}
+
+	Therefore, $y^{-1}a = ay^{-1}$, implying $y^{-1} \in C(a)$ and thereby making $xy^{-1} \in C(a)$ a corollary because:
+
+	\begin{align*}
+		(xy^{-1})a &= x(y^{-1}a) &&\text{(By associativity)} \\
+		&= x(ay^{-1}) &&\text{(Since $y \in C(a)$)} \\
+		&= (xa)y^{-1} &&\text{(By associativity)} \\
+		&= (ax)y^{-1} &&\text{(Since $x \in C(a)$)} \\
+		&= a(xy^{-1}) &&\text{(By associativity)} \\
+	\end{align*}
+
+	Immediately follows. Thus, by the one-line subgroup test, $C(a)$ is indeed a subgroup of $G$.
+\end{solution}
+
+\begin{subproblem}
+	Two friends, Goofus and Gallant, are arguing about the following claim:
+
+	\begin{gather*}
+		\textit{``If } a, b \in G, \textit{then } C(a) \cap C(b) = C(ab)\text{''} \\
+	\end{gather*}
+
+	Goofus thinks ``$\subseteq$'' is true, but Gallant thinks ``$\supseteq$'' is true. Who is correct? Prove one inclusion, and give an explicit counterexample showing that the other inclusion is false in general.
+\end{subproblem}
+
+%FIX: QUESTION 1.C
+% PROVIDE COUNTER EXAMPLE
+% SOMETHING TO DO WITH GL
+% ALSO SANITY CHECK LATER
+
+\begin{solution}
+	I contend, and will proceed to show, that $\subseteq$ is indeed the only correct inclusion. To do this, I intend to formally prove that $(C(a) \cap C(b)) \subseteq C(ab)$ for any arbitrary $a \in G$, for any arbitrary group $G$, and provide a specific group $G$ with elements $a, b \in G$ such that $(C(a) \cap C(b)) \supseteq C(ab)$ doesn't hold, making Gallant's inclusion false in general.
+
+	\begin{step}
+		Prove that $(C(a) \cap C(b)) \subseteq C(ab)$.
+	\end{step}
+
+	To prove this inclusion, I will show that $x \in (C(a) \cap C(b))$ implies that $x \in C(ab)$. So, let any such $x$ be arbitrary. \\
+
+	By definition 
+
+\end{solution}
+
+
+\ifdefined\iscombined
+	\newpage
+\else
+	\end{document}
+\fi
