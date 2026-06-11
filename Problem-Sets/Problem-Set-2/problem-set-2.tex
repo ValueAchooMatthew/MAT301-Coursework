@@ -161,7 +161,15 @@
 		\tau = (2, 4), \; \tau = () \\
 	\end{gather*}
 
-	must permute with $\sigma$ and so belong to the centralizer $C(\sigma)$.
+	must permute with $\sigma$ and so belong to the centralizer $C(\sigma)$. \\
+
+	We also know, that $\sigma^{-1}$ must commute with $\sigma$ (since by definition of inverses, $\sigma{\sigma}^{-1} = {\sigma}^{-1}\sigma = 1$). Therefore, seeing as $\sigma^{-1} = (531)$, we can also conclude that:
+
+	\begin{gather*}
+		\tau = (5, 3, 1) \\
+	\end{gather*}
+
+	must also permute with $\sigma$, hence making $C(\sigma) \supseteq \set{(), (2, 4), (5, 3, 1)}$ \\
 \end{solution}
 
 \begin{subproblem}
@@ -241,6 +249,8 @@
 
 	To show that this inclusion is generally false, we need only observe a single group $G$ with specific elements $a, b \in G$ such that $x \in C(ab)$ but $x \not\in (C(a) \cap C(b))$. \\
 
+
+
 \end{solution}
 
 %FIX: QUESTION 2
@@ -270,7 +280,22 @@
 \end{subproblem}
 
 \begin{solution}
+	This statement is false. \\
 
+	To demonstrate this, let's assume for the purposes of deriving a contradiction, that $\mathbb{Q}$ is indeed cyclic. This means that there exists some $x \in \mathbb{Q}$ such that $\gen{x} = \mathbb{Q}$, or in other words, that for arbitrary $y \in \mathbb{Q}$, there exists some positive integer $n \in \mathbb{N}$ such that $nx = y$. \\
+
+	By definition of rational numbers, we know that $x \in \mathbb{Q}$ if there exists integers $p, q \in \mathbb{Z}$ such that $x = \frac{p}{q}$. However, $y = \frac{p}{2q}$ likewise must belong to $\mathbb{Q}$, since closure of $\mathbb{Z}$ under multiplication implies that $2q \in \mathbb{Z}$, meaning both the numerator and denominator of $\frac{p}{2q}$ are both integers, thus satisfying the definition of rationality. \\
+
+	From this choice of $y$, it now becomes clear that there exists no $n \in \mathbb{N}$ such that $nx = y$, since such an equality would imply that:
+
+	\begin{align*}
+		nx &= y \\
+		\implies n\frac{p}{q} &= \frac{p}{2q} \\
+		\implies \frac{np}{q} &= \frac{p}{2q} \\
+		\implies n &= \frac{1}{2}
+	\end{align*}
+
+	Thus preventing $n$ from being a positive integer. Thus, it cannot be the case that $nx = y$ for all $y \in \mathbb{Q}$, contradicting our assumption that $\gen{x} = \mathbb{Q}$. Hence, $\mathbb{Q}$ cannot be cyclic under addition.
 \end{solution}
 
 \begin{subproblem}
@@ -281,7 +306,7 @@
 
 \end{solution}
 
-%FIX: QUESTION 3
+%TODO: Question 3
 
 \begin{problem}[The relationship between $\ord{x}$ and $\ord{x^{m}}$.]
 	Let $G$ be a group, and let $x$ be an element of $G$ of finite order $n = \ord{x}$. Let $m$ be an integer which is coprime to $n$. Prove that $\ord{x^m} = n$. \\
@@ -292,10 +317,25 @@
 \end{problem}
 
 \begin{solution}
+	Let $G$ be a group and let $x \in G$ be such that $\ord{x} = n$. To prove that for coprime $m \in \mathbb{Z}, \ord{x^{m}} = n$, we need to show that $n$ must be the smallest positive number satisfying $(x^{m})^n = 1$. \\
 
+	To do this, I first want to establish that $\ord{x^{m}}$ is finite to begin with. By definition of the order of an element, we know that $\ord{x} = n$ implies that $x^{n} = 1$. By use of exponent laws, we therefore have that:
+
+	\begin{align*}
+		(x^{m})^{n} &= x^{mn} &&\text{(By result of Exercise 4.1.b)} \\
+		&= (x^{n})^{m} &&\text{(By result of Exercise 4.1.b)} \\
+		&= 1^{m} &&\text{(Since $x^{n} = 1$)} \\
+		&= 1 &&\text{(Inductively from the definition of the identity)} \\
+	\end{align*}
+
+	Hence, we know that $\ord{x^{m}}$ must be less than to equal to $n$. So, letting $k = \ord{x^{m}}$ where $k \in \mathbb{N}$, we know by definition of the order of $x^{m}$ that $(x^{m})^{k} = 1$. By the exponent law referenced earlier, this therefore must mean that $x^{mk} = 1$. \\
+
+	Now, from before, we also know not only that $x^{n} = 1$, but that $\ord{x} = n$. This enables us to use Theorem 4.3! Theorem 4.3 tells us that since $n$ is the order of $x$, and $x^{mk} = 1$, then $n | mk$. Or in other words, $n$ must divide $mk$. \\
+
+	However, by the lemma we were so generously given, we therefore have that $n$ must divide $k$. This is because $n$ divides $mk$, where $n$ and $m$ were both assumed to be coprime. It therefore quickly follows that $k$ must therefore be equal to $n$, since $k$ must be the smallest, positive multiple of $n$. \\
+
+	Therefore, since $k = \ord{x^{m}}$ and $k = n$, the order of $x^{m}$ is $n$, as required.
 \end{solution}
-
-%FIX: QUESTION 4
 
 \begin{problem}[The relationship between $\ord{x}, \ord{y}$, and $\ord{xy}$.]
 	This is a follow-up to a question from the May 27th tutorial. \\
@@ -308,7 +348,20 @@
 \end{problem}
 
 \begin{solution}
+	To prove $\ord{xy} = \lcm{m}{n}$, I first seek to establish that $\ord{xy}$ is finite to begin with. As before, this is thankfully quite easy to do. \\
 
+	To start off, recall that $m = \ord{x}$ and $n = \ord{y}$ necessarily implies that $x^{m} = 1$ and $y^{n} = 1$. Now, let $L = \lcm{m}{n}$. By definition of the lowest common multiple, we know that there exists positive integers $k, l \in \mathbb{N}$ (positive since $m, n$ are the orders of $x$ and $y$ respectively and so must themselves be positive) such that $mk = L$ and $nl = L$ respectively. Furthermore, since $x$ and $y$ were assumed to commutative, we can use exponent rules to see that:
+
+	\begin{align*}
+		(xy)^{L} &= x^{L}y^{L} &&\text{(By result of Exercise 4.1.c)} \\
+		&= (x^{mk})(y^{nl}) &&\text{(By definition of $k, l$)} \\
+		&= (x^{m})^{k}(y^{n})^{l} &&\text{(By result of Exercise 4.1.b)} \\
+		&= (1)^{k}(1)^{l} &&\text{(Since $x^{m} = 1$ and $y^{n} = 1$)} \\
+		&= (1)(1) &&\text{(Inductively from the definition of the identity)} \\
+		&= 1 &&\text{By definition of the identity} \\
+	\end{align*}
+
+	Hence, we have both that $\ord{xy}$ must indeed be finite, and that $\ord{xy} \le L = \lcm{m}{n}$. To prove that $\ord{xy} = \lcm{m}{n}$, we can proceed by idk contradiction I think ran out of time :/.
 \end{solution}
 
 %FIX: Question 5
@@ -321,7 +374,20 @@
 \end{subproblem}
 
 \begin{solution}
+	Let $A, B$ be arbitrary groups satisfying the above condition. To prove the cyclicity of $A$ and $B$, we need to prove the existence of two elements I will call $c_1 \in A$ and $c_2 \in B$ respectively such that $\gen{a} = A$ and $\gen{b} = B$. To aid in this endeavour, let $\ast$ and $\#$ represent $A$ and $B$'s respective group operators. \\
 
+	We begin by leveraging the cyclicity of $A \times B$. By definition of cyclicity, we know there must exist some $c \in (A \times B)$ such that $\gen{c} = A \times B$, which further implies that for every element $(a, b) \in (A \times B)$ (that is, any element in the set $\set{(a, b) \colon a \in A, b \in B}$), there exists some positive integer $n \in \mathbb{N}$ such that $c^{n} = (a, b)$. Furthermore, we can easily see that $c = (c_1, c_2) \in (A \times B)$ means $c_1 \in A$ and $c_2 \in B$. \\
+
+	By definition of the direct product, we know that $(c_1, c_2)(c_1, c_2) = (c_1 \ast c_1, c_2 \# c_2)$ and so for any $n$:
+
+	\begin{align*}
+		(a, b) &= c^{n} &&\text{(By definition of cyclicity)} \\
+		&= ((c_1, c_2))^{n} &&\text{(By definition of $c$)} \\
+		&= \Big(\underbrace{c_1 \ast c_1 \ast \ldots \ast c_1}_{n \text{ times}},\ \underbrace{c_2 \# c_2 \# \ldots \# c_2}_{n \text{ times}}\Big) &&\text{(By definition of the direct product)} \\
+		&= ((c_1)^{n}, (c_2)^{n}) &&\text{(By definition of exponentiation)} \\
+	\end{align*}
+
+	And so, since for arbitrary $(a, b) \in (A \times B)$, there exists an $n \in \mathbb{N}$ such that $(c_1, c_2)^{n} = (c_1^{n}, c_2^{n}) = (a, b)$, it therefore follows that ${c_1}^{n} = a$ and ${c_2}^{n} = b$. Since $a$ and $b$ were arbitrary, we can therefore deduce that such an $n$ must exist for all possible $a$ and $b$. Thus, by definition of cyclicity, we therefore have that $\gen{c_1} = A$ and $\gen{c_2} = B$, necessarily making $A$ and $B$ cyclic groups.
 \end{solution}
 
 \begin{subproblem}
@@ -353,13 +419,63 @@
 \end{problem}
 
 \begin{subproblem}
-	Prove that $r^{k}s = sr^{-k}$. \\
+	Prove that $r^{k}s = sr^{-k}$ for all $k \in \mathbb{N}$. \\
 
 	\emph{Hint:} Induction, with Rule \#4 being the base case.
 \end{subproblem}
 
 \begin{solution}
+	To prove the above statement for all $k \in \mathbb{N}$, we may use the principle of mathematical induction. If we are successfully able to prove that $r^{1}s = sr^{-1}$, and after assuming that $r^{k}s = sr^{-k}$ holds, show that $r^{k + 1}s = s^{-(k + 1)}$ naturally must follow, we can invoke the principle of mathematical induction that $r^{k}s = sr^{-k}$ must be true for all integers $k \in \mathbb{N}$. Below is my attempt of precisely this. \\
 
+	\begin{step}
+		Prove the base case.
+	\end{step}
+
+	Since:
+
+	\begin{align*}
+		r^{1}s &= rs &&\text{(By definition of exponentiation)} \\
+		&= sr^{-1} &&\text{(By rule \#4)} \\
+	\end{align*}
+	
+	We can ascertain that the base case does indeed hold.
+
+	\begin{step}
+		State the inductive hypothesis.
+	\end{step}
+
+	Letting $n \in \mathbb{N}$ be arbitrary, we can formulate our inductive hypothesis in terms of $n$ as the statement:
+
+	\begin{align*}
+		r^{n}s &= sr^{-n} \\
+	\end{align*}
+
+	And thus, the statement $r^{k}s = sr^{-k}$ is assumed to be true whenever $k = n$.
+
+	\begin{step}
+		Prove the inductive step.
+	\end{step}
+
+	To prove the inductive step, we must show that if the inductive hypothesis holds, $r^{n + 1}s = rs^{-(n + 1)}$ also holds. Now, by exponent laws we know that:
+
+	\begin{align*}
+		r^{n + 1}s &= (r^{n}r^{1})s &&\text{(By result of Exercise 4.1.a)} \\
+		&= r^{n}(r^{1}s) &&\text{(By associativity)} \\
+		&= r^{n}(rs) &&\text{(By definition of exponentiation)} \\
+	\end{align*}
+
+	And since $rs = sr^{-1}$ by rule \#4:
+
+	\begin{align*}
+		&= r^{n}(sr^{-1}) &&\text{(By rule \#4)} \\
+		&= (r^{n}s)r^{-1} &&\text{(By associativity)} \\
+		&= (sr^{-n})r^{-1} &&\text{(By inductive hypothesis)} \\
+		&= s(r^{-n}r^{-1}) &&\text{(By associativity)} \\
+		&= sr^{-n - 1} &&\text{(By result of Exercise 4.1.a)} \\
+		&= sr^{-(n + 1)} &&\text{(By distributivity of multiplication over addition)} \\
+	\end{align*}
+
+	We therefore have that $r^{n + 1}s = rs^{-(n + 1)}$ does indeed hold if the inductive hypothesis holds. By the base case, we know that $r^{k}s = sr^{-k}$ does hold when $k = 1$. Thus, since $k = 1$ is true, and we know that whenever $r^{n}s = sr^{-n}$ holds, $n + 1$ likewise holds, we can therefore conclude by the principle of mathematical induction that $r^{k}s = sr^{-k}$ holds for all $k \in \mathbb{N}$
 \end{solution}
 
 \begin{subproblem}
@@ -405,7 +521,37 @@
 \end{subproblem}
 
 \begin{solution}
+	To prove this, we can once again use the one-line subgroup theorem! Let $a, b \in \Delta$ be arbitrary. To appeal to the one-line subgroup theorem and conclude $\Delta \le (G \times G)$, we must show that $ab^{-1}$ must also belong to $\Delta$. \\
 
+	By definition of $\Delta$, we can express $a = (x_1, y_1)$ and $b = (x_2, y_2)$ respectively, where $(x_1, y_1), (x_2, y_2) \in (G \times G)$ such that $x_1 = y_1$ and $x_2 = y_2$. Clearly, $(x_2, y_2) \in (G \times G)$ implies that $x_2, y_2$ are both elements of $G$, and since $G$ is assumed to be a group, there must exist inverse elements ${x_2}^{-1}, {y_2}^{-1} \in G$ such that $x_2{x_2}^{-1} = {x_2}^{-1}{x_2} = 1 = {y_2}{y_2}^{-1} = {y_2}^{-1}{y_2}$. \\
+
+	By definition of the direct product then, we know that $({x_2}^{-1}, {y_2}^{-1}) \in (G \times G)$, and additionally that $({x_2}^{-1}, {y_2}^{-1})$ must be the inverse of $(x_2, y_2)$ since:
+
+	\begin{align*}
+		(x_2, y_2)({x_2}^{-1}, {y_2}^{-1}) &= (x_2{x_2}^{-1}, {y_2}{y_2}^{-1}) \\
+		&= (1, 1) \\
+		&= ({x_2}^{-1}x_2, {y_2}^{-1}{y_2}) \\
+		&= ({x_2}^{-1}, {y_2}^{-1})(x_2, y_2) \\
+	\end{align*}
+
+	By definition of the inverse and since the group operation on $G \times G$ is just the group element of $G$ applied pointwise. \\
+
+	Therefore, since it is now established that $({x_2}^{-1}, {y_2}^{-1})$ is the inverse of $(x_2, y_2)$, and since $b = (x_2, y_2)$, we can thereby conclude that $b^{-1} = ({x_2}^{-1}, {y_2}^{-1})$. Therefore, we know that $ab^{-1}$ is given by:
+
+	\begin{align*}
+		ab^{-1} &= (x_1, y_1)({x_2}^{-1}, {y_2}^{-1}) \\
+		&= ({x_1}{x_2}^{-1}, {y_1}{y_2}^{-1}) \\
+	\end{align*}
+
+	Once again by definition of the direct product's group operation. Recalling now that $x_1 = y_1$ and $x_2 = y_2$ (implying ${y_2}^{-1} = {x_2}^{-1}$ by the uniqueness of inverses), we can further see that $ab^{-1}$ can be further expressed as:
+
+	\begin{align*}
+		ab^{-1} &= ({x_1}{x_2}^{-1}, {y_1}{y_2}^{-1}) \\
+		&= ({y_1}{x_2}^{-1}, {y_1}{y_2}^{-1}) &&\text{(Since $x_1 = y_1$)} \\
+		&= ({y_1}{x_2}^{-1}, {y_1}{x_2}^{-1}) &&\text{(Since ${x_2}^{-1} = {y_2}^{-1}$)} \\
+	\end{align*}
+
+	Thus, since it is trivially the case that ${y_1}{x_2}^{-1} = {y_1}{x_2}^{-1}$, we know that $({y_1}{x_2}^{-1}, {y_1}{x_2}^{-1}) = ab^{-1} \in \Delta$. Thus, by the one-line subgroup test, we can conclude that $\Delta$ is indeed a subgroup of $G \times G$.
 \end{solution}
 
 \begin{subproblem}
