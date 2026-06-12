@@ -1,0 +1,318 @@
+\ifdefined\iscombined
+	\problemset{Problem Set 1}
+\else
+\documentclass{article}
+\usepackage{xparse}
+\usepackage{tabularx}
+\usepackage{changepage}
+\usepackage{listings}
+\usepackage{amsthm}
+\usepackage{comment}
+\usepackage{amsmath}
+\usepackage{braket}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{sectsty}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{mathtools}
+
+\date{
+	\vspace{-.75em}
+	{\large \today}
+}
+
+\title{
+	\vspace*{-1.5em}
+	{\Huge Problem Set 1} \\
+	\vspace{-1em}
+	\rule{\textwidth/2}{.01em} \\
+	\vspace{-.75em}
+}
+
+\author{
+	{\large Matthew Farah}
+}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=blue,
+	citecolor=blue,
+	anchorcolor=blue
+}
+
+\fancyhead{}
+\fancyhead[L]{\today}
+\fancyhead[R]{Problem Set 1}
+
+\setlength{\parindent}{0cm}
+
+\newenvironment{solution}{
+	\vspace{.5em}
+	\par
+	\begin{adjustwidth}{1.5em}{}
+	\textbf{{Solution:}}
+	\par
+	\vspace{.5em}
+}{
+	\vspace{1em}
+	\end{adjustwidth}
+	\setcounter{step}{0}
+}
+
+\makeatother
+\makeatletter
+
+\newcounter{step}
+\renewcommand{\thestep}{\Roman{step}}
+
+\newenvironment{step}{
+	\refstepcounter{step}
+	\vspace{1em}\par\noindent
+	\ignorespaces\noindent\textbf{(\thestep)}
+	\ignorespaces
+}{
+	\par
+	\vspace{1.5em}
+}
+
+\newcounter{problem}
+\renewcommand{\theproblem}{\arabic{problem}}
+
+\newenvironment{problem}[1][]{
+	\newpage
+	\refstepcounter{problem}
+	\setcounter{subproblem}{0}
+	\vspace{.5em}\par\noindent
+	\begin{adjustwidth}{1.5em}{}
+	\noindent\textbf{Problem \theproblem: }\noindent\textit{#1}
+	\par
+	\phantomsection
+	\addcontentsline{toc}{section}{\protect{\large{Problem \theproblem}}}
+}{
+	\vspace{.5em}
+	\end{adjustwidth}
+}
+
+
+\newcounter{subproblem}
+\renewcommand{\thesubproblem}{\alph{subproblem}}
+
+\newenvironment{subproblem}{
+	\setcounter{step}{0}
+	\refstepcounter{subproblem}
+	\phantomsection
+	\addcontentsline{toc}{subsection}{\protect{\large{(\thesubproblem)}}}
+	\begin{adjustwidth}{1.5em}{}
+	\noindent{\textbf{(\thesubproblem) }}\ignorespaces
+}{
+	\par
+	\vspace{.5em}
+	\end{adjustwidth}
+}
+
+\newcounter{proposition}
+\renewcommand{\theproposition}{\arabic{proposition}}
+
+\newenvironment{proposition}{
+	\refstepcounter{proposition}
+	\vspace{1em}\par\noindent
+	\noindent\textbf{Proposition.}
+	\noindent\textit
+	\ignorespaces
+}{
+	\vspace{.5em}
+}
+
+\newcommand{\supp}[1]{\text{supp}({#1})}
+\newcommand{\ord}[1]{\text{ord}({#1})}
+\newcommand{\gen}[1]{\langle {#1} \rangle}
+\newcommand{\lcm}[2]{\text{lcm}({#1}, {#2})}
+
+\sectionfont{\fontsize{12}{12}\bfseries}
+\subsectionfont{\fontsize{10}{12}\normalfont}
+\subsubsectionfont{\fontsize{10}{12}\normalfont}
+
+\begin{document}
+
+\maketitle
+\pagestyle{fancy}
+
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\tableofcontents
+
+\fi
+
+\begin{problem}
+	Goofus, a MAT102 student, has asked you to critique his proof. \\
+
+	\fbox{
+		\begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+			\begin{proposition}
+				Let $n \in \mathbb{Z}$. Then $n$ is odd if and only if $n^2$ is odd.
+			\end{proposition}
+		
+			\begin{proof}
+				$n$ odd $\implies \exists k, n = 2k + 1 \implies n^2 = (2k + 1)^{2} = 4k^{2} + 4k + 1 = 2(2k^{2} + 2k) + 1 = 2l + 1 \implies n^2$ odd. \\
+		
+				$n$ even $\implies n = 2k \implies n^{2} = (2k)^{2} = 4k^{2} = 2(2k^{2}) = 2l \therefore n^{2}$ even. \\
+		
+				Hence proved. \\
+			\end{proof}
+		\end{minipage}
+	} \\\\
+
+	Goofus' proof is logically correct, but very poorly communicated. Unfortunately, Goofus would get a score of 0/10 for submitting this proof in MAT301. Nice try, Goofus!
+\end{problem}
+
+\begin{subproblem}
+	Point out five things in Goofus' proof that need improvement.
+\end{subproblem}
+
+\begin{solution}
+
+\end{solution}
+
+\begin{subproblem}
+	Write your own proof of this proposition, focusing on improving the communication issues you noticed in Goofus' proof.
+\end{subproblem}
+
+\begin{solution}
+
+\end{solution}
+
+\begin{problem}
+	Consider the following binary operation on $\mathbb{Q}$:
+
+	\begin{gather*}
+		x \otimes y \coloneq x + y + xy \\
+	\end{gather*}
+
+	For example, $2 \otimes 3 = 11$.
+\end{problem}
+
+\begin{subproblem}
+	Prove that $\otimes$ is associative.
+\end{subproblem}
+
+\begin{solution}
+	Let $a, b$, and $c \in \mathbb{Q}$ be arbitrary. To prove associativity, we must show that $(a \otimes b) \otimes c = a \otimes (b \otimes c)$. By simply using the given definition of $\otimes$ and basic facts related to multiplication and addition on $\mathbb{Q}$, we can indeed see that:
+
+	\begin{align*}
+		(a \otimes b) \otimes c &= (a + b + ab) \otimes c &&\text{(By definition of $\otimes$)} \\
+		&= a + b + ab + c + (a + b + ab)c &&\text{(By definition of $\otimes$)} \\
+		&= a + b + ab + c + ac + bc + abc &&\text{(By distributivity of multiplication over addition on $\mathbb{Q}$)} \\
+		&= a + ab + ac + abc + b + c + bc &&\text{(By commutativity of addition on $\mathbb{Q}$)} \\
+		&= a + ab + ac + abc + (b \otimes c) &&\text{(By definition of $\otimes$)} \\
+		&= a + a(b + c + bc) + (b \otimes c) &&\text{(By distributivity of multiplication over addition on $\mathbb{Q}$)} \\
+		&= a + a(b \otimes c) + (b \otimes c) &&\text{(By definition of $\otimes$)} \\
+		&= a + (b \otimes c) + a(b \otimes c) &&\text{(By commutativity of addition on $\mathbb{Q}$)} \\
+		&= a \otimes (b \otimes c) &&\text{(By definition of $\otimes$)} \\
+	\end{align*}
+
+	And so, since $(a \otimes b) \otimes c = a \otimes (b \otimes c)$, $\otimes$ is associative over $\mathbb{Q}$.
+\end{solution}
+
+\begin{subproblem}
+	Prove that $\otimes$ is commutative.
+\end{subproblem}
+
+\begin{solution}
+	Let $a, b \in \mathbb{Q}$ be arbitrary. To prove commutativity, we must show that $a \otimes b = b \otimes a$, by a similar process as before, we can see that:
+
+	\begin{align*}
+		a \otimes b &= a + b + ab &&\text{(By definition of $\otimes$)} \\
+		&= b + a + ab &&\text{(By commutativity of addition on $\mathbb{Q}$)} \\
+		&= b + a + ba &&\text{(By commutativity of multiplication on $\mathbb{Q}$)} \\
+		&= b \otimes a &&\text{(By definition of $\otimes$)} \\
+	\end{align*}
+
+	Thus, since $a \otimes b = b \otimes a$, $\otimes$ is indeed commutative over $\mathbb{Q}$.
+\end{solution}
+
+\begin{subproblem}
+	Find, with a proof, the identity element for $\otimes$.
+\end{subproblem}
+
+\begin{solution}
+	The identity element for $\otimes$ in $\mathbb{Q}$ is 0. To prove that 0 is really $\otimes$'s identity element, we need to show that for arbitrary $a \in \mathbb{Q}$, $a \otimes 0 = 0 \otimes a = a$. Letting $a$ be any such element in $\mathbb{Q}$ then, expanding gives:
+
+	\begin{align*}
+		\boxed{a \otimes 0} &= a + 0 + a(0) &&\text{(By definition of $\otimes$)} \\
+		&= a + 0 + 0 &&\text{(By property of multiplication by zero)} \\
+		&= \boxed{a} &&\text{(Since 0 is the additive identity on $\mathbb{Q}$)} \\
+		&= 0 + a + 0 &&\text{(Since 0 is the additive identity on $\mathbb{Q}$)} \\
+		&= 0 + a + 0(a) &&\text{(By property of multiplication by zero)} \\
+		&= \boxed{0 \otimes a} &&\text{(By definition of $\otimes$)} \\
+	\end{align*}
+
+	Therefore, since 0 satisfies $a \otimes 0 = 0 \otimes a = a$ for arbitrary $a \in \mathbb{Q}$, 0 is the identity element of $\otimes$ over $\mathbb{Q}$.
+\end{solution}
+
+\begin{subproblem}
+	Find, with proof, the inverse of $\frac{5}{6}$.
+\end{subproblem}
+
+\begin{solution}
+	The inverse of $\frac{5}{6}$ is $\frac{-5}{11}$. To prove that this is indeed the case, we need to show that for $\frac{5}{6} \otimes \frac{-5}{11} = \frac{-5}{11} \otimes \frac{-5}{11} = 0$, since we previously determined 0 to be the identity element of $\otimes$ over $\mathbb{Q}$. Expanding out, we find that:
+
+	\begin{align*}
+		\boxed{\frac{5}{6} \otimes \frac{-5}{11}} &= \frac{5}{6} - \frac{5}{11} + \left( \frac{5}{6} \right) \left( \frac{-5}{11} \right) &&\text{(By definition of $\otimes$)} \\
+		&= \frac{55}{66} - \frac{30}{66} - \frac{25}{66} &&\text{(Simplifying)} \\
+		&= \boxed{0} &&\text{(Simplifying)} \\
+		&= -\frac{30}{66} + \frac{55}{66} - \frac{25}{66}  &&\text{(Expanding)} \\
+		&= -\frac{-5}{11} + \frac{5}{6} + \left( \frac{-5}{11} \right) \left( \frac{5}{6} \right) &&\text{(Expanding)} \\
+		&= \boxed{\frac{5}{6} \otimes \frac{-5}{11}} &&\text{(By definition of $\otimes$)} \\
+	\end{align*}
+
+	And so, $-\frac{5}{11}$ is the inverse of $\frac{5}{6}$ under $\otimes$ in $\mathbb{Q}$.
+\end{solution}
+
+\begin{subproblem}
+	Describe all rational numbers that are invertible with respect to $\otimes$. In fact, given a rational number $x \in \mathbb{Q}$, find a formula for the inverse of $x$ with respect to $\otimes$.
+\end{subproblem}
+
+\begin{solution}
+	All rational numbers, except $-1$, are invertible. \\
+
+	To see this clearly, I will proceed by a direct proof. Letting $a \in \mathbb{Q}$ be arbitrary, we know definitionally that the inverse of $a$ is an element $a^{-1} \in \mathbb{Q}$ satisfying $a \otimes a^{-1} = a^{-1} \otimes a = 0$, since 0 was determined earlier to be the identity element of $\otimes$ over $\mathbb{Q}$. By definition of $\otimes$, we therefore can see that $a \otimes a^{-1} = 0$ yields:
+
+	\begin{align*}
+		a \otimes a^{-1} &= 0 &&\text{(By definition of inverse)} \\
+		\implies a + a^{-1} + aa^{-1} &= 0 &&\text{(By definition of $\otimes$)} \\
+		\implies a + (1 + a)a^{-1} &= 0 &&\text{(By distributivity of multiplication over addition on $\mathbb{Q}$)} \\
+		\implies (1 + a)a^{-1} &= -a &&\text{(Moving $a$ to the right-hand side)} \\
+		\implies a^{-1} &= -\frac{a}{1 + a} &&\text{(Moving $a$ to the right-hand side)} \\
+	\end{align*}
+
+	Notice however that the final equality we arrived at is undefined in the case that $a = -1$, meaning that $-1 \in \mathbb{Q}$ cannot possibly have an inverse under $\otimes$. The equality however is perfectly valid for all other numbers in $\mathbb{Q}$. Thus, every element in $\mathbb{Q} \setminus \set{-1}$ has an inverse under $\otimes$, and for any $a \in \left( \mathbb{Q} \setminus \set{-1} \right)$, its inverse is given by $a^{-1} = -\frac{a}{1 + a}$.
+\end{solution}
+
+\begin{problem}
+	Let $2 \le n$ and let $u \in \mathbb{Z}_{n}$. Recall that $u$ is a ``unit modulo $n$'' if it is multiplicatively invertible. Thus, there exists $v \in \mathbb{Z}_{n}$ such that $uv \equiv 1 \mod n$. Let $\mathbb{Z^{\times}}_{n}$ denote the set of all unit modules of $n$; For example, $\mathbb{Z^{\times}}_{9} = \set{1, 2, 4, 5, 7, 8}$.
+\end{problem}
+
+\begin{subproblem}
+	Write down the multiplication table for the group $\mathbb{Z^{\times}}_{36}$.
+\end{subproblem}
+
+\begin{solution}
+	First, we must actually determine $\mathbb{Z^{\times}}_{36}$.
+\end{solution}
+
+
+
+
+
+
+\ifdefined\iscombined
+	\newpage
+\else
+	\end{document}
+\fi
