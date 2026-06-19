@@ -1,0 +1,318 @@
+\ifdefined\iscombined
+	\tutorial{Tutorial 1}
+\else
+\documentclass{article}
+\usepackage{xparse}
+\usepackage{tabularx}
+\usepackage{changepage}
+\usepackage{listings}
+\usepackage{amsthm}
+\usepackage{comment}
+\usepackage{amsmath}
+\usepackage{braket}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{sectsty}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+
+\date{
+	\vspace{-.75em}
+	{\large \today}
+}
+
+\title{
+	\vspace*{-1.5em}
+	{\Huge Tutorial 1} \\
+	\vspace{-1em}
+	\rule{\textwidth/2}{.01em} \\
+	\vspace{-.75em}
+}
+
+\author{
+	{\large Matthew Farah}
+}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=blue,
+	citecolor=blue,
+	anchorcolor=blue
+}
+
+\fancyhead{}
+\fancyhead[L]{\today}
+\fancyhead[R]{Tutorial 1}
+
+\setlength{\parindent}{0cm}
+
+\tikzset{vertex/.style = {shape = circle, draw, minimum size = 2em}}
+\tikzset{edge/.style = {->,> = latex'}}
+
+\newenvironment{solution}{
+	\vspace{.5em}
+	\par
+	\begin{adjustwidth}{1.5em}{}
+	\textbf{{Solution:}}
+	\par
+	\vspace{.5em}
+}{
+	\vspace{1em}
+	\end{adjustwidth}
+	\setcounter{step}{0}
+}
+
+\makeatother
+\makeatletter
+
+\newcounter{step}
+\renewcommand{\thestep}{\Roman{step}}
+
+\newenvironment{step}{
+	\refstepcounter{step}
+	\vspace{1em}\par\noindent
+	\ignorespaces\noindent\textbf{(\thestep)}
+	\ignorespaces
+}{
+	\par
+	\vspace{1.5em}
+}
+
+\newcounter{problem}
+\renewcommand{\theproblem}{\arabic{problem}}
+
+\newenvironment{problem}[1][]{
+	\newpage
+	\refstepcounter{problem}
+	\setcounter{subproblem}{0}
+	\vspace{.5em}\par\noindent
+	\begin{adjustwidth}{1.5em}{}
+	\noindent\textbf{Problem \theproblem: }\noindent\textit{#1}
+	\par
+	\phantomsection
+	\addcontentsline{toc}{section}{\protect{\large{Problem \theproblem}}}
+}{
+	\vspace{.5em}
+	\end{adjustwidth}
+}
+
+
+\newcounter{subproblem}
+\renewcommand{\thesubproblem}{\alph{subproblem}}
+
+\newenvironment{subproblem}{
+	\setcounter{step}{0}
+	\refstepcounter{subproblem}
+	\phantomsection
+	\addcontentsline{toc}{subsection}{\protect{\large{(\thesubproblem)}}}
+	\begin{adjustwidth}{1.5em}{}
+	\noindent{\textbf{(\thesubproblem) }}\ignorespaces
+}{
+	\par
+	\vspace{.5em}
+	\end{adjustwidth}
+}
+
+\newcounter{lemma}
+\renewcommand{\thelemma}{\arabic{lemma}}
+
+\newenvironment{lemma}[1][]{
+	\refstepcounter{lemma}
+	\vspace{1em}\par\noindent
+	\noindent\textbf{Lemma ({#1}): }\noindent\ignorespaces
+}{
+	\vspace{.5em}
+}
+
+\newcounter{proposition}
+\renewcommand{\theproposition}{\arabic{proposition}}
+
+\newenvironment{proposition}{
+	\refstepcounter{proposition}
+	\vspace{1em}\par\noindent
+	\noindent\textbf{Proposition:}
+	\noindent\textit
+	\ignorespaces
+}{
+	\vspace{.5em}
+}
+
+\newcommand{\supp}[1]{\text{supp}({#1})}
+\newcommand{\ord}[1]{\text{ord}({#1})}
+\newcommand{\gen}[1]{\langle {#1} \rangle}
+\newcommand{\lcm}[2]{\text{lcm}({#1}, {#2})}
+\renewcommand{\mod}[1]{\ (\text{mod} \; {#1})}
+
+\sectionfont{\fontsize{12}{12}\bfseries}
+\subsectionfont{\fontsize{10}{12}\normalfont}
+\subsubsectionfont{\fontsize{10}{12}\normalfont}
+
+\begin{document}
+
+\maketitle
+\pagestyle{fancy}
+
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\tableofcontents
+
+\fi
+
+\begin{problem}
+	Define a binary operator $\ast$ on $\mathbb{Z} \times \mathbb{Z}$ by:
+
+	\begin{align*}
+		(a, b) \ast (c, d) \coloneq (ab + bc, bd) \\
+	\end{align*}
+
+	Is $\mathbb{Z} \times \mathbb{Z}$ a group under this operation? If so, prove it by establishing which group axioms fail (with proofs/counterexamples).
+\end{problem}
+
+\begin{solution}
+	$\mathbb{Z} \times \mathbb{Z}$ does \underline{not} constitute a group under $\ast$. To see why, we'll examine which of the group axioms fail to hold and why. As a refresher, for $(\mathbb{Z} \times \mathbb{Z}, \ast)$ to be a group, it must satisfy all of the following four criteria:
+	\begin{enumerate}
+		\item $\ast$ must be a binary operator on $\mathbb{Z} \times \mathbb{Z}$.
+		\item $\ast$ must be associative over $\mathbb{Z} \times \mathbb{Z}$.
+		\item $\ast$'s identity element must be contained in $\mathbb{Z} \times \mathbb{Z}$.
+		\item Every element in $\mathbb{Z} \times \mathbb{Z}$ must have an inverse in $\mathbb{Z} \times \mathbb{Z}$ with respect to $\ast$. \\
+	\end{enumerate}
+
+	We will investigate each criterion separately below.
+
+	\begin{step}
+		Criterion one.
+	\end{step}
+
+	The first criterion states that $\ast$ must be a binary operator on $\mathbb{Z} \times \mathbb{Z}$. \\
+
+	For $\ast$ to form a binary operator over $\mathbb{Z} \times \mathbb{Z}$, it must be defined and closer over all of $\mathbb{Z} \times \mathbb{Z}$. By inspection, and knowledge of the fact that $\mathbb{Z}$ is closed under both multiplication and addition, we can see that this is actually the case, and so $\ast$ does indeed constitute a valid binary operator over $\mathbb{Z} \times \mathbb{Z}$.
+
+	\begin{step}
+		Criterion two.
+	\end{step}
+
+	Criterion two states that $\ast$ must be associative over $\mathbb{Z} \times \mathbb{Z}$. \\
+
+	By counter example, we can see that this fails to hold true. Although $(1, 0), (0, 2)$, and $(3, 0)$ all belong to $\mathbb{Z} \times \mathbb{Z}$, we have that:
+
+	\begin{align*}
+		((1, 0) \ast (0, 2)) \ast (3, 0) &= (2, 0) \ast (3, 0) \\
+		&= (0, 0) \\
+	\end{align*}
+
+	Whereas:
+
+	\begin{align*}
+		(1, 0) \ast ((0, 2) \ast (3, 0)) &= (1, 0) \ast (0, 6) \\
+		&= (6, 0) \\
+	\end{align*}
+
+	And thus, since $(a \ast b) \ast c \neq a \ast (b \ast c)$ for all $a, b, c \in (\mathbb{Z} \times \mathbb{Z})$, $\ast$ is not associative over its domain and so criterion two isn't satisfied.
+
+	\begin{step}
+		Criterion three.
+	\end{step}
+
+	Criterion three states that $\ast$ must have an identity element in $\mathbb{Z} \times \mathbb{Z}$. \\
+
+	Despite not being associative, it is actually the case that $\ast$ has an identity element in $\mathbb{Z} \times \mathbb{Z}$. To see this, let $(a, b)$ be an arbitrary element in $\mathbb{Z} \times \mathbb{Z}$. Since:
+
+	\begin{align*}
+		\boxed{(a, b) \ast (0, 1)} &= (a(1) + b(0), b(1)) &&\text{(By definition of $\ast$)} \\
+		&= \boxed{(a, b)} &&\text{(Simplifying)} \\
+		&= (0(b) + 1(a), 1(b)) &&\text{(Expanding)} \\
+		&= \boxed{(0, 1) \ast (a, b)} &&\text{(By definition of $\ast$)} \\
+	\end{align*}
+
+	$(0, 1) \in (\mathbb{Z} \times \mathbb{Z})$ therefore satisfies $(a, b) \ast (0, 1) = (a, b) = (0, 1) \ast (a, b)$ for arbitrary $(a, b) \in \mathbb{Z} \times \mathbb{Z}$, making it an identity element for $\ast$ in its domain. Thus, $\ast$ really does have an identity element in $\mathbb{Z} \times \mathbb{Z}$, satisfying criterion three.
+
+	\begin{step}
+		Criterion four.
+	\end{step}
+
+	Lastly, criterion four requires that every element in $\mathbb{Z} \times \mathbb{Z}$ have an inverse under $\ast$ that's contained in $\mathbb{Z} \times \mathbb{Z}$. \\
+
+	$\ast$ fails to satisfy criterion four as well. Taking $(1, 0)$ as an example, we can see it to have an inverse in $\mathbb{Z} \times \mathbb{Z}$ there must exist some $(a, b) \in (\mathbb{Z} \times \mathbb{Z})$ such that:
+
+	\begin{align*}
+		(1, 0) \ast (a, b) &= (0, 1) &&\text{(By definition of inverse)} \\
+	\end{align*}
+
+	Since we determined as a part of our analysis of criterion three that $(0, 1)$ must be the identity of $\ast$ over $\mathbb{Z} \times \mathbb{Z}$. However, since:
+
+	\begin{align*}
+		(1, 0) \ast (a, b) &= (0, 1) &&\text{(By our earlier equality)} \\
+		\implies ((1)(b) + (0)(a), (0)(b)) &= (0, 1) &&\text{(By definition of $\ast$)} \\
+		\implies (b, 0) &= (0, 1) &&\text{(Simplifying)} \\
+		\implies 0 &= 1 &&\text{(Equating entries)} \\
+	\end{align*}
+
+	Since this clearly cannot be the case, $(1, 0)$ (and actually, any element of the form $(x, 0)$) cannot have an inverse in $\mathbb{Z} \times \mathbb{Z}$ under $\ast$. Hence, criterion four is violated as well.
+\end{solution}
+
+\begin{problem}
+	Let $G$ be a group and let $a, b \in G$. Prove that the inverse of $ab$ is $b^{-1}a^{-1}$.
+\end{problem}
+
+\begin{solution}
+	Let $a, b \in G$ be arbitrary and let $a^{-1}, b^{-1} \in G$ be their respective inverses. To show that the inverse of $ab$ is $b^{-1}a^{-1}$, we need to show that $(ab)(b^{-1}a^{-1}) = (b^{-1}a^{-1})(ab) = 1$. Thankfully, this can be proven directly and relatively easily using the following manipulations:
+
+	\begin{align*}
+		\boxed{(ab)(b^{-1}a^{-1})} &= a(b(b^{-1}a^{-1})) &&\text{(By associativity)} \\
+		&= a((bb^{-1})a^{-1}) &&\text{(By associativity)} \\
+		&= a((1)a^{-1}) &&\text{(By definition of inverse)} \\
+		&= aa^{-1} &&\text{(By definition of identity)} \\
+		&= \boxed{1} &&\text{(By definition of inverse)} \\
+		&= b^{-1}b &&\text{(By definition of inverse)} \\
+		&= b^{-1}((1)b) &&\text{(By definition of identity)} \\
+		&= b^{-1}((a^{-1}a)b) &&\text{(By definition of inverse)} \\
+		&= (b^{-1}(a^{-1}a))b &&\text{(By associativity)} \\
+		&= ((b^{-1}a^{-1})a)b &&\text{(By associativity)} \\
+		&= \boxed{(b^{-1}a^{-1})(ab)} &&\text{(By associativity)} \\
+	\end{align*}
+
+	And so, the inverse of $ab$ is indeed $b^{-1}a^{-1}$!
+\end{solution}
+
+\begin{problem}
+	Let $G$ be a group and let $a, b \in G$. Prove that if $a$ and $b$ commute, then so do $a^{-1}$ and $b^{-1}$.
+\end{problem}
+
+\begin{solution}
+	Once again, let $a, b \in G$ be arbitrary elements such that $a$ and $b$ commute, and let $a^{-1}, b^{-1} \in G$ be their respective inverses. To show that $a^{-1}$ and $b^{-1}$ commute, we must prove that $a^{-1}b^{-1} = b^{-1}a^{-1}$. Since $a$ and $b$ are assumed to be commutative, we know that $ab = ba$. Using this, we have that: \\
+
+	\begin{align*}
+		a^{-1}b^{-1} &= 1(a^{-1}b^{-1}) &&\text{(By definition of identity)} \\
+		&= ((b^{-1}a^{-1})(ab))(a^{-1}b^{-1}) &&\text{(By definition of inverse)} \\
+		&= (b^{-1}a^{-1})((ab)(a^{-1}b^{-1})) &&\text{(By associativity)} \\
+		&= (b^{-1}a^{-1})((ba)(a^{-1}b^{-1})) &&\text{(By commutativity of $a$ and $b$)} \\
+		&= (b^{-1}a^{-1})(1) &&\text{(By definition of inverse)} \\
+		&= b^{-1}a^{-1} &&\text{(By definition of identity)} \\
+	\end{align*}
+
+	And so, since $a^{-1}b^{-1} = b^{-1}a^{-1}$, we indeed have that $a^{-1}$ and $b^{-1}$ commute.
+\end{solution}
+
+\begin{problem}
+	Prove that a group with exactly four elements must be abelian. \\
+
+	(\emph{Hint}: Let $G \coloneq \set{1, a, b, c}$ and make a multiplication table for $G$ by brute force. Start by showing either that $ab = 1$ or $ab = c$; thus proceed by brute force.)
+\end{problem}
+
+\begin{solution}
+
+\end{solution}
+
+\ifdefined\iscombined
+	\newpage
+\else
+	\end{document}
+\fi
