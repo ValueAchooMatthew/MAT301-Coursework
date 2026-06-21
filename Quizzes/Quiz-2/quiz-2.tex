@@ -1,0 +1,515 @@
+\ifdefined\iscombined
+	\quiz{Quiz 2}
+\else
+\documentclass{article}
+\usepackage{xparse}
+\usepackage{tabularx}
+\usepackage{changepage}
+\usepackage{listings}
+\usepackage{amsthm}
+\usepackage{comment}
+\usepackage{amsmath}
+\usepackage{braket}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{sectsty}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usetikzlibrary{arrows, arrows.meta}
+
+\date{
+	\vspace{-.75em}
+	{\large \today}
+}
+
+\title{
+	\vspace*{-1.5em}
+	{\Huge Quiz 2} \\
+	\vspace{-1em}
+	\rule{\textwidth/2}{.01em} \\
+	\vspace{-.75em}
+}
+
+\author{
+	{\large Matthew Farah}
+}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=blue,
+	citecolor=blue,
+	anchorcolor=blue
+}
+
+\fancyhead{}
+\fancyhead[L]{\today}
+\fancyhead[R]{Quiz 2}
+
+\setlength{\parindent}{0cm}
+
+\tikzset{vertex/.style = {shape = circle, draw, minimum size = 2em}}
+\tikzset{edge/.style = {-,> = latex'}}
+
+\newenvironment{solution}{
+	\vspace{.5em}
+	\par
+	\begin{adjustwidth}{1.5em}{}
+	\textbf{{Solution:}}
+	\par
+	\vspace{.5em}
+}{
+	\vspace{1em}
+	\end{adjustwidth}
+	\setcounter{step}{0}
+}
+
+\makeatother
+\makeatletter
+
+\newcounter{step}
+\renewcommand{\thestep}{\Roman{step}}
+
+\newenvironment{step}{
+	\refstepcounter{step}
+	\setcounter{substep}{0}
+	\vspace{1em}\par\noindent
+	\ignorespaces\noindent\textbf{(\thestep)}
+	\ignorespaces
+}{
+	\par
+	\vspace{1.5em}
+}
+
+\newcounter{substep}
+\renewcommand{\thesubstep}{\alph{substep}}
+
+\newenvironment{substep}{
+	\refstepcounter{substep}
+	\vspace{1em}\par\noindent
+	\ignorespaces\noindent\textbf{(\thesubstep)}
+	\ignorespaces
+}{
+	\par
+	\vspace{1.5em}
+}
+
+
+\newcounter{problem}
+\renewcommand{\theproblem}{\arabic{problem}}
+
+\newenvironment{problem}[1][]{
+	\newpage
+	\refstepcounter{problem}
+	\setcounter{subproblem}{0}
+	\vspace{.5em}\par\noindent
+	\begin{adjustwidth}{1.5em}{}
+	\noindent\textbf{Problem \theproblem: }\noindent\textit{#1}
+	\par
+	\phantomsection
+	\addcontentsline{toc}{section}{\protect{\large{Problem \theproblem}}}
+}{
+	\vspace{.5em}
+	\end{adjustwidth}
+}
+
+\newcounter{subproblem}
+\renewcommand{\thesubproblem}{\alph{subproblem}}
+
+\newenvironment{subproblem}{
+	\setcounter{step}{0}
+	\refstepcounter{subproblem}
+	\phantomsection
+	\addcontentsline{toc}{subsection}{\protect{\large{(\thesubproblem)}}}
+	\begin{adjustwidth}{1.5em}{}
+	\noindent{\textbf{(\thesubproblem) }}\ignorespaces
+}{
+	\par
+	\vspace{.5em}
+	\end{adjustwidth}
+}
+
+\newcounter{lemma}
+\renewcommand{\thelemma}{\arabic{lemma}}
+
+\newenvironment{lemma}[1][]{
+	\refstepcounter{lemma}
+	\vspace{1em}\par\noindent
+	\noindent\textbf{Lemma ({#1}): }\noindent\ignorespaces
+}{
+	\vspace{.5em}
+}
+
+\newcounter{proposition}
+\renewcommand{\theproposition}{\arabic{proposition}}
+
+\newenvironment{proposition}{
+	\refstepcounter{proposition}
+	\vspace{1em}\par\noindent
+	\noindent\textbf{Proposition:}
+	\noindent\textit
+	\ignorespaces
+}{
+	\vspace{.5em}
+}
+
+\newcommand{\supp}[1]{\text{supp}({#1})}
+\newcommand{\ord}[1]{\text{ord}\left({#1}\right)}
+\newcommand{\gen}[1]{\left\langle {#1} \right\rangle}
+\newcommand{\lcm}[2]{\text{lcm}({#1}, {#2})}
+\newcommand{\dprod}[2]{\mathbb{Z}_{#1} \times \mathbb{Z}_{#2}}
+
+\renewcommand{\mod}[1]{\ (\text{mod} \; {#1})}
+
+\sectionfont{\fontsize{12}{12}\bfseries}
+\subsectionfont{\fontsize{10}{12}\normalfont}
+\subsubsectionfont{\fontsize{10}{12}\normalfont}
+
+\begin{document}
+
+\maketitle
+\pagestyle{fancy}
+
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\tableofcontents
+
+\fi
+
+\newpage
+
+Please note the quiz is based on the following topics:
+\begin{itemize}
+	\item Subgroups.
+	\item Cyclic groups.
+\end{itemize}
+
+\begin{problem}
+	Which of the following elements generate the group $\dprod{3}{4}$?
+\end{problem}
+
+\begin{subproblem}
+	$(1, 2)$.
+\end{subproblem}
+
+\begin{solution}
+	$(1, 2)$ doesn't generate $\dprod{3}{4}$ since:
+
+	\begin{align*}
+		\gen{(1, 2)} &= \set{0(1, 2), 1(1, 2), 2(1, 2), 3(1, 2), 4(1, 2), 5(1, 2)} \\
+		&= \set{(0, 0), (1, 2), (2, 0), (0, 2), (1, 0), (2, 2)} \\
+	\end{align*}
+
+	and because an element like $(2, 1)$ belongs to $\dprod{3}{4}$ but doesn't belong to $\gen{(1, 2)}$, $(1, 2)$ can't be a generator for $\dprod{3}{4}$.
+\end{solution}
+
+\begin{subproblem}
+	$(1, 1)$.
+\end{subproblem}
+
+\begin{solution}
+	$(1, 1)$ does indeed generate $\dprod{3}{4}$. To see why, we can try a different approach than the one used for \textbf{(a)}. \\
+
+	It is clearly the case that the element $1$ in $\mathbb{Z}_{3}$ has order 3 and $1 \in \mathbb{Z}_{4}$ has order 4 (since $(3)(1) \mod{3} \equiv 0$ and $(4)(1) \mod{4} \equiv 0$ respectively). By an earlier theorem, we know that the order of $(1, 1)$ is therefore given by:
+
+	\begin{align*}
+		\ord{(1, 1)} &= \lcm{3}{4} \\
+		&= 12
+	\end{align*}
+
+	And since $|\dprod{3}{4}| = |\mathbb{Z}_{3}||\mathbb{Z}_{4}| = (3)(4) = 12$ as well, $(1, 1)$ has the same order as $\dprod{3}{4}$ which means that $(1, 1)$ generates $\dprod{3}{4}$!
+\end{solution}
+
+\begin{subproblem}
+	$(2, 3)$.
+\end{subproblem}
+
+\begin{solution}
+	$(2, 3)$ does indeed generate $\dprod{3}{4}$. Using a brute-force approach, as we did in \textbf{(a)}, we have that:
+
+	\vspace{2em}
+
+	\begin{tabularx}{\linewidth}{Y Y Y}
+		$0(2, 3) = (0, 0)$ & $4(2, 3) = (2, 0)$ & $8(2, 3) = (1, 0)$ \\
+		$1(2, 3) = (2, 3)$ & $5(2, 3) = (1, 3)$ & $9(2, 3) = (0, 3)$ \\
+		$2(2, 3) = (1, 2)$ & $6(2, 3) = (0, 2)$ & $10(2, 3) = (2, 2)$ \\
+		$3(2, 3) = (0, 1)$ & $7(2, 3) = (2, 1)$ & $11(2, 3) = (1, 1)$ \\
+	\end{tabularx}
+
+	\vspace{2em}
+
+	And so, since $\gen{(2,3)} = \set{(0, 0), (0, 1), (0, 2), (0, 3), (1, 0), (1, 1), (1, 2), (1, 3), (2, 0), (2, 1), (2, 2), (2, 3)} = \dprod{3}{4}$, $(2, 3)$ is a generator for $\dprod{3}{4}$.
+\end{solution}
+
+\begin{subproblem}
+	$(0, 1)$.
+\end{subproblem}
+
+\begin{solution}
+	$(0, 1)$ doesn't generate $\dprod{3}{4}$. To see why, all we need is recognize that the element $(1, 1)$ belongs to $\dprod{3}{4}$. \\
+
+	For $(0, 1)$ to actually generate $\dprod{3}{4}$, there must exist some integer $k \in \mathbb{Z}$ such that $k(0, 1) = (1, 1)$. However, this cannot be the case since such a $k$ would necessarily have to satisfy $0k = 1$, which is clearly impossible! \\
+
+	Thus, $\gen{(0, 1)}$ cannot possibly generate $\dprod{3}{4}$.
+\end{solution}
+
+\begin{problem}
+	In the group $\dprod{5}{6}$, what is the order of the element $(2, 3)$?
+\end{problem}
+
+\begin{solution}
+	The order of $(2, 3)$ in $\dprod{5}{6}$ is 10. \\
+
+	To find the order of $(2, 3)$ in $\dprod{5}{6}$, we can leverage the fact that, since $\dprod{5}{6}$ is the group formed by the direct product of the groups $\mathbb{Z}_{5}$ and $\mathbb{Z}_{6}$, the order of any element $(a, b) \in \dprod{5}{6}$ is the lowest common multiple of $\ord{a}$ and $\ord{b}$. \\
+
+	Thus, $\ord{(2, 3)} = \lcm{2}{3}$, where $2 \in \mathbb{Z}_{5}$ and $3 \in \mathbb{Z}_{6}$ respectively. Now, because $\ord{2} = 5$ and $\ord{3} = 2$ in their respective groups (which can be easily verified in the computations below):
+
+	\begin{align*}
+		(1)(2) &\equiv 2 & (1)(3) &\equiv 3 \\
+		(2)(2) &\equiv 4 & (2)(3) &\equiv 0 \\
+		(3)(2) &\equiv 1 & & \\
+		(4)(2) &\equiv 3 & & \\
+		(5)(2) &\equiv 0 & & \\
+	\end{align*}
+
+	we have that $\ord{(2, 3)} = \lcm{5}{2} = 10$.
+\end{solution}
+
+\begin{problem}
+	What are the orders of the following permutations?
+\end{problem}
+
+\begin{subproblem}
+	$(1234)$.
+\end{subproblem}
+
+\begin{solution}
+	Brute forcing, we have that $\ord{(1234)} = 4$ since:
+
+	\vspace{2em}
+
+	\begin{tabularx}{\linewidth}{Y || Y Y Y Y Y}
+		$n$ & $(1234)^{n - 1}$ & $\circ$ & $(1234)$ & $=$ & $(1234)^{n}$ \\
+		\hline
+		\hline
+		$1$ & $()$ & $\circ$ & $(1234)$ & $=$ & $(1234)$ \\
+		$2$ & $(1234)$ & $\circ$ & $(1234)$ & $=$ & $(13)(24)$ \\
+		$3$ & $(13)(24)$ & $\circ$ & $(1234)$ & $=$ & $(1432)$ \\
+		$4$ & $(1432)$ & $\circ$ & $(1234)$ & $=$ & $()$ \\
+	\end{tabularx}
+\end{solution}
+
+\begin{subproblem}
+	$(123)(456)$.
+\end{subproblem}
+
+\begin{solution}
+	Brute forcing once again, we have that $\ord{(123)(456)} = 3$ since:
+
+	\vspace{2em}
+
+	\begin{tabularx}{\linewidth}{Y || Y Y Y Y Y}
+		$n$ & $((123)(456))^{n - 1}$ & $\circ$ & $(123)(456)$ & $=$ & $((123)(456))^{n}$ \\
+		\hline
+		\hline
+		$1$ & $()$ & $\circ$ & $(123)(456)$ & $=$ & $(123)(456)$ \\
+		$2$ & $(123)(456)$ & $\circ$ & $(123)(456)$ & $=$ & $(132)(465)$ \\
+		$3$ & $(132)(456)$ & $\circ$ & $(123)(456)$ & $=$ & $()$ \\
+	\end{tabularx}
+
+	\vspace{2em}
+	
+	Notice as well that we could have also easily deduced that $\ord{(123)(456)} = 3$ by the fact that $\ord{(123)} = \ord{(456)} = 3$, and so since $\ord{(123)(456)} = \lcm{\ord{(123)}}{\ord{(456)}} = \lcm{3}{3}$, we'd automatically have that $\ord{(123)(456)} = 3$.
+\end{solution}
+
+\begin{subproblem}
+	$(12)(345)$.
+\end{subproblem}
+
+\begin{solution}
+	$\ord{(12)(345)} = 6$ because, by the following tables:
+
+	\vspace{2em}
+
+	\begin{tabularx}{\linewidth}{Y || Y Y Y Y Y}
+		$n$ & $(12)^{n - 1}$ & $\circ$ & $(12)$ & $=$ & $(12)^{n}$ \\
+		\hline
+		\hline
+		$1$ & $()$ & $\circ$ & $(12)$ & $=$ & $(12)$ \\
+		$2$ & $(12)$ & $\circ$ & $(12)$ & $=$ & $()$ \\
+	\end{tabularx}
+
+	\vspace{2em}
+
+	\begin{tabularx}{\linewidth}{Y || Y Y Y Y Y}
+		$n$ & $(345)^{n - 1}$ & $\circ$ & $(345)$ & $=$ & $(345)^{n}$ \\
+		\hline
+		\hline
+		$1$ & $()$ & $\circ$ & $(345)$ & $=$ & $(345)$ \\
+		$2$ & $(345)$ & $\circ$ & $(345)$ & $=$ & $(354)$ \\
+		$3$ & $(354)$ & $\circ$ & $(345)$ & $=$ & $()$ \\
+	\end{tabularx}
+
+	\vspace{2em}
+
+	$\ord{(12)} = 2$ and $\ord{(345)} = 3$, and since $\ord{(12)(345)} = \lcm{\ord{(12)}}{\ord{(345)}}$, we have that:
+
+	\begin{align*}
+		\ord{(12)(345)} &= \lcm{\ord{(12)}}{\ord{(345)}} \\
+		&= \lcm{2}{3} \\
+		&= 6
+	\end{align*}
+\end{solution}
+
+\begin{subproblem}
+	$(12)(3456)$.
+\end{subproblem}
+
+\begin{solution}
+	Generalizing our earlier findings, we can conclude that $\ord{(12)(3456)} = 4$, since $\ord{(12)} = 2$ and $\ord{(3456)} = 4$, and since $\ord{(12)(3456)} = \lcm{\ord{(12)}}{\ord{(3456)}}$:
+
+	\begin{align*}
+		\ord{(12)(3456)} &= \lcm{\ord{(12)}}{\ord{(3456)}} \\
+		&= \lcm{2}{4} \\
+		&= 4
+	\end{align*}
+\end{solution}
+
+\begin{problem}
+	How many element $A_{5}$ have order 5?
+\end{problem}
+
+\begin{solution}
+	To find the number of elements in $A_{5}$ that have order 5, we will (admittedly somewhat unnecessarily) proceed by first proving that a claim that permutation in $A_{5}$ has order 5 if and only if its cycle type is $(5)$. \\
+
+	\begin{step}
+		Prove the claim's forward direction.
+	\end{step}
+
+	The forward direction of the claim states that if a permutation $\sigma \in A_{5}$ has order 5, then it has a cycle type of $(5)$. To prove the claim in this direction, we need to show that any element in the set $\set{1, 2, 3, 4, 5}$ must be permuted by $\sigma$ exactly a multiple of 5 times before equalling itself. Or, in other words, we need to show that if $a \in \set{1, 2, 3, 4, 5}$, then $\sigma^{n}(a) = a$ if and only if $n = 5k$ for some integer $k \in \mathbb{Z}$. \\
+
+	We will therefore proceed by proving this subclaim.
+
+	\begin{substep}
+		Prove the forward direction of the subclaim.
+	\end{substep}
+
+	The subclaim's forward direction states that if $\sigma^{n}(a) = a$ for all $a \in \set{1, 2, 3, 4, 5}$, then there exists some integer $k \in \mathbb{Z}$ such that $n = 5k$. \\
+
+	To see why this is the case, we need only recognize that if $\sigma^{n}(a) = a$ for all such $a$, then $\sigma^{n}(a) = ()$, by definition of the identity permutation. Recalling as well that $\ord{\sigma}$ was assumed to be equal to 5 earlier, we know that $\sigma^{5} = ()$ by definition of order. Thus, we know by Theorem 4.3 that 5 must divide $n$, and hence there must exist some integer $k \in \mathbb{Z}$ such that $n = 5k$, by definition of divisibility by 5. \\
+
+	Thus, since $\sigma^{n}(a) = a$ for all $a \in \set{1, 2, 3, 4, 5}$ implies $n = 5k$ for all $k \in \mathbb{Z}$, the forward direction of our claim has been proven.
+
+	\begin{substep}
+		Prove the reverse direction of the subclaim.
+	\end{substep}
+
+	The reverse direction of the subclaim states that if $n = 5k$ for some integer $k \in \mathbb{Z}$, then $\sigma^{n}(a) = a$ for all $a \in \set{1, 2, 3, 4, 5}$. \\
+
+	This is actually, and thankfully, quite easy to show. To see why this direction is true, recall that $\ord{\sigma} = 5$ by assumption and so by definition of order, $\sigma^{5} = ()$. Thus, letting $a \in \set{1, 2, 3, 4, 5}$ be arbitrary, we have that:
+
+	\begin{align*}
+		\sigma^{n}(a) &= \sigma^{5k}(a) &&\text{(By our earlier characterization of $n$)} \\
+		&= (\sigma^{5})^{k}(a) &&\text{(By exponent laws)} \\
+		&= (()^{k})(a) &&\text{(Since $\ord{\sigma} = 5$)} \\
+		&= ()(a) &&\text{(Inductively by definition of the identity)} \\
+		&= a &&\text{(By definition of the identity)} \\
+	\end{align*}
+
+	And thus, since $\sigma^{n}(a) = a$ for all $a \in \set{1, 2, 3, 4, 5}$ whenever $n = 5k$ for some integer $k \in \mathbb{Z}$, the subclaim's reverse direction is proven. \\
+
+	And so, since both \textbf{(a)} and \textbf{(b)} both hold, the subclaim's if-and-only-if premise logically follows. Hence, because the subclaim implies that $\sigma^{n}(a) = a$ for all $a \set{1, 2, 3, 4, 5}$ if and only if $n$ is a multiple of 5, it clearly follows that $\sigma$ must have a cycle type of $(5)$. \\
+
+	Therefore, since $\sigma$ having an order of 5 implies it has a cycle type of $(5)$, the original claim's forward direction has been successfully proven.
+
+	\begin{step}
+		Prove the reverse direction of the claim.
+	\end{step}
+
+	The reverse direction states that if a permutation $\sigma \in A_{5}$ has a cycle type of $(5)$, then it has an order of 5. To prove the claim in this direction, we need to show that $n = 5$ is the smallest positive integer satisfying $\sigma^{n} = ()$. \\
+
+	Thankfully, this too is quite each to prove. Because $\sigma$ has a cycle type of $(5)$ by assumption, we can express that $\sigma$ is of the form $(abcde)$, where $a, b, c, d, e \in \set{1, 2, 3, 4, 5}$ and each of $a, b, c, d$, and $e$ are pairwise distinct. So, by brute forcing, we find that:
+
+	\vspace{2em}
+
+	\begin{tabularx}{\linewidth}{Y || Y Y Y Y Y}
+		$n$ & $\sigma^{n - 1}$ & $\circ$ & $\sigma$ & $=$ & $\sigma^{n}$ \\
+		\hline
+		\hline
+		$1$ & $()$ & $\circ$ & $(abcde)$ & $=$ & $(abcde)$ \\
+		$2$ & $(abcde)$ & $\circ$ & $(abcde)$ & $=$ & $(acebd)$ \\
+		$3$ & $(acebd)$ & $\circ$ & $(abcde)$ & $=$ & $(adbec)$ \\
+		$4$ & $(adbec)$ & $\circ$ & $(abcde)$ & $=$ & $(aedcb)$ \\
+		$5$ & $(aedcb)$ & $\circ$ & $(abcde)$ & $=$ & $()$ \\
+	\end{tabularx}
+
+	\vspace{2em}
+
+	And thus, since $\sigma^{5}$ both equals the identity permutation $()$, and is the smallest positive power of $\sigma$ to do so, $\ord{\sigma}$ is necessarily 5 by definition. \\
+
+	Thus, since \textbf{(I)} and \textbf{(II)} have been shown to hold, our claim that $\sigma \in A_{5}$ has an order of 5 if and only if it has a cycle type of $(5)$ is proven. Phew! \\
+
+	And so, since we know that $A_{5}$ has $\frac{5!}{5} = \frac{120}{5} = 24$ permutation of cycle type $(5)$ we can know conclusively say that $A_{5}$ has exactly 24 elements with an order of $5$ by the claim we just proved.
+\end{solution}
+
+\begin{problem}
+	In the group $GL_{2}(\mathbb{Z}_{3})$, how many elements are in the subgroup generated by $\begin{pmatrix} 1 & 0 \\ 2 & 2 \end{pmatrix}$?
+\end{problem}
+
+\begin{solution}
+	Considering how involved our more rigorous earlier proof got, we're just going to solve this one by brute force lol. \\
+
+	Intuitively, the number of elements in the subgroup generated by $\begin{pmatrix} 1 & 0 \\ 2 & 2 \end{pmatrix}$ is just the number of distinct powers of $\begin{pmatrix} 1 & 0 \\ 2 & 2 \end{pmatrix}$, which is just its order. And since:
+
+
+	\vspace{2em}
+
+	\begin{tabularx}{\linewidth}{Y || Y Y Y Y Y}
+		$n$ & $\hspace{1.5em} {\begin{pmatrix} 1 & 0 \\ 2 & 2 \end{pmatrix}}^{n - 1}$ & $\cdot$ & $\begin{pmatrix} 1 & 0 \\ 2 & 2 \end{pmatrix}$ & $=$ & $\hspace{0.5em}{\begin{pmatrix} 1 & 0 \\ 2 & 2 \end{pmatrix}}^{n}$ \\[10pt]
+		\hline
+		\hline
+		$1$ & \rule{0pt}{18pt}$\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$ & $\cdot$ & $\begin{pmatrix} 1 & 0 \\ 2 & 2 \end{pmatrix}$ & $=$ & $\begin{pmatrix} 1 & 0 \\ 2 & 2 \end{pmatrix}$ \\[10pt]
+		$2$ & $\begin{pmatrix} 1 & 0 \\ 2 & 2 \end{pmatrix}$ & $\cdot$ & $\begin{pmatrix} 1 & 0 \\ 2 & 2 \end{pmatrix}$ & $=$ & $\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$ \\
+	\end{tabularx}
+
+	\vspace{2em}
+
+	we have that $\ord{\begin{pmatrix} 1 & 0 \\ 2 & 2 \end{pmatrix}} = 2$. Thus, $\gen{\begin{pmatrix} 1 & 0 \\ 2 & 2 \end{pmatrix}}$ has exactly 2 elements.
+\end{solution}
+
+\begin{problem}
+	Let $G$ be an abelian group and let $a, b \in G$. If $\ord{a} = 12$ and $\ord{b} = 18$, then what does $\ord{ab}$ equal?
+\end{problem}
+
+\begin{solution}
+	Let $n \coloneq \ord{ab}$. By definition of order, we know that $(ab)^{n} = 1$. Since $G$ is abelian, we know by the result of \textbf{Exercise 1 (c)} that:
+
+	\begin{align*}
+		(ab)^{n} &= a^{n}b^{n} \\
+	\end{align*}
+
+	So, since $\ord{a} = 12$ and $\ord{b} = 18$, and the lowest common multiple of 12 and 18 is 36, we know that 36 is the smallest positive integer satisfying:
+	
+	\begin{align*}
+		(ab)^{36} &= a^{36}b^{36} &&\text{(Since $G$ is abelian)} \\
+		&= (a^{12})^{3}(b^{18})^{2} &&\text{(By exponent laws)} \\
+		&= (1)^{3}(1)^{2} &&\text{(Since $\ord{a} = 12$ and $\ord{b} = 18$)} \\
+		&= (1)(1) &&\text{(Inductively by definition of the identity)} \\
+		&= 1 &&\text{(By definition of the identity)} \\
+	\end{align*}
+\end{solution}
+
+
+
+
+\ifdefined\iscombined
+	\newpage
+\else
+	\end{document}
+\fi
