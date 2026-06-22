@@ -1,0 +1,213 @@
+\ifdefined\iscombined
+	\problemset{Problem Set 3}
+\else
+\documentclass{article}
+\usepackage{xparse}
+\usepackage{tabularx}
+\usepackage{changepage}
+\usepackage{listings}
+\usepackage{amsthm}
+\usepackage{comment}
+\usepackage{amsmath}
+\usepackage{braket}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{sectsty}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+
+\date{
+	\vspace{-.75em}
+	{\large \today}
+}
+
+\title{
+	\vspace*{-1.5em}
+	{\Huge Problem Set 3} \\
+	\vspace{-1em}
+	\rule{\textwidth/2}{.01em} \\
+	\vspace{-.75em}
+}
+
+\author{
+	{\large Matthew Farah}
+}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=blue,
+	citecolor=blue,
+	anchorcolor=blue
+}
+
+\fancyhead{}
+\fancyhead[L]{\today}
+\fancyhead[R]{Problem Set 3}
+
+\setlength{\parindent}{0cm}
+
+\tikzset{vertex/.style = {shape = circle, draw, minimum size = 2em}}
+\tikzset{edge/.style = {->,> = latex'}}
+
+\newenvironment{solution}{
+	\vspace{.5em}
+	\par
+	\begin{adjustwidth}{1.5em}{}
+	\textbf{{Solution:}}
+	\par
+	\vspace{.5em}
+}{
+	\vspace{1em}
+	\end{adjustwidth}
+	\setcounter{step}{0}
+}
+
+\makeatother
+\makeatletter
+
+\newcounter{step}
+\renewcommand{\thestep}{\Roman{step}}
+
+\newenvironment{step}{
+	\refstepcounter{step}
+	\vspace{1em}\par\noindent
+	\ignorespaces\noindent\textbf{(\thestep)}
+	\ignorespaces
+}{
+	\par
+	\vspace{1.5em}
+}
+
+\newcounter{problem}
+\renewcommand{\theproblem}{\arabic{problem}}
+
+\newenvironment{problem}[1][]{
+	\newpage
+	\refstepcounter{problem}
+	\setcounter{subproblem}{0}
+	\vspace{.5em}\par\noindent
+	\begin{adjustwidth}{1.5em}{}
+	\noindent\textbf{Problem \theproblem: }\noindent\textit{#1}
+	\par
+	\phantomsection
+	\addcontentsline{toc}{section}{\protect{\large{Problem \theproblem}}}
+}{
+	\vspace{.5em}
+	\end{adjustwidth}
+}
+
+
+\newcounter{subproblem}
+\renewcommand{\thesubproblem}{\alph{subproblem}}
+
+\newenvironment{subproblem}{
+	\setcounter{step}{0}
+	\refstepcounter{subproblem}
+	\phantomsection
+	\addcontentsline{toc}{subsection}{\protect{\large{(\thesubproblem)}}}
+	\begin{adjustwidth}{1.5em}{}
+	\noindent{\textbf{(\thesubproblem) }}\ignorespaces
+}{
+	\par
+	\vspace{.5em}
+	\end{adjustwidth}
+}
+
+\newcounter{lemma}
+\renewcommand{\thelemma}{\arabic{lemma}}
+
+\newenvironment{lemma}[1][]{
+	\refstepcounter{lemma}
+	\vspace{1em}\par\noindent
+	\noindent\textbf{Lemma ({#1}): }\noindent\ignorespaces
+}{
+	\vspace{.5em}
+}
+
+\newcounter{proposition}
+\renewcommand{\theproposition}{\arabic{proposition}}
+
+\newenvironment{proposition}{
+	\refstepcounter{proposition}
+	\vspace{1em}\par\noindent
+	\noindent\textbf{Proposition:}
+	\noindent\textit
+	\ignorespaces
+}{
+	\vspace{.5em}
+}
+
+\newcommand{\supp}[1]{\text{supp}({#1})}
+\newcommand{\ord}[1]{\text{ord}({#1})}
+\newcommand{\gen}[1]{\langle {#1} \rangle}
+\newcommand{\lcm}[2]{\text{lcm}({#1}, {#2})}
+\renewcommand{\mod}[1]{\ (\text{mod} \; {#1})}
+
+\sectionfont{\fontsize{12}{12}\bfseries}
+\subsectionfont{\fontsize{10}{12}\normalfont}
+\subsubsectionfont{\fontsize{10}{12}\normalfont}
+
+\begin{document}
+
+\maketitle
+\pagestyle{fancy}
+
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\tableofcontents
+
+\fi
+
+\begin{problem}
+\end{problem}
+
+\begin{subproblem}
+	Let $G$ be a group of order 27. Prove that $G$ has an element of order $3$.
+\end{subproblem}
+
+\begin{solution}
+
+\end{solution}
+
+\begin{subproblem}
+	Let $G$ be a group of even order. Prove that $G$ has an odd number of elements of order $2$.
+\end{subproblem}
+
+\begin{solution}
+
+\end{solution}
+
+\begin{subproblem}
+	Let $G$ be a group of order 12. Prove that $G$ has an element of order $2$.
+\end{subproblem}
+
+\begin{solution}
+
+\end{solution}
+
+\begin{problem}[The Twice-A-Prime Theorem]
+	Here we will prove a useful lemma about groups of order $2p$, where $p$ is an odd prime $--$ for example, groups of order $6, 10, 14, 22, \ldots$.
+\end{problem}
+
+\begin{subproblem}
+	Let $G$ be a group, and let $a, b \in G$ be two commuting elements of order 2. Prove that the set $H = \set{1, a, b, ab}$ is a subgroup of $G$.
+\end{subproblem}
+
+
+
+
+
+
+\ifdefined\iscombined
+	\newpage
+\else
+	\end{document}
+\fi
