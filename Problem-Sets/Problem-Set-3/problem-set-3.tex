@@ -174,17 +174,79 @@
 \end{subproblem}
 
 \begin{solution}
+	To prove that $G$ has an element of order 3, we need to demonstrate that there exists some element $x \in G$ such that $n = 3$ is the smallest positive integer satisfying $x^{n} = 1$. \\
 
+	So to that end, let's let $a \in G \setminus \set{1}$ be an arbitrary element in $G$ (besides the identity) (which we can do since there are necessarily 26 elements in $G$ besides the identity), and let $m = \ord{a}$ denote the order of $a$. By Corollary 7.9, we know that $m$ must be a divisor of 27, since $|G| = 27$. \\
+
+	Thus, since the divisors of 27 are 1, 3, 9, and 27, we need only consider four possible cases for $m$.
+
+	\begin{step}
+		$m = 1$.
+	\end{step}
+
+	I lied, this isn't \emph{really} an actual case, as we will soon discover, but is a point needing addressing. Although 1 is indeed a divisor of 27, the order of $a$ cannot possibly be 1 because we defined $a$ to be any arbitrary element of $G$ \underline{besides} the identity. To see why this is the case, notice that if $m$ did in fact equal 1, we would have that $a^{m} = 1$, and so:
+
+	\begin{align*}
+		a^{m} &= 1 &&\text{(By definition of order)} \\
+		\implies a^{1} &= 1 &&\text{(By assumption that $m = 1$)} \\
+		\implies a &= 1 &&\text{(By definition of exponentiation)} \\
+	\end{align*}
+
+	Which would contradict $a$ as having been defined as any element of $G$ besides the identity. Hence $m$ cannot equal 1, leaving us only to consider the following three other cases.
+
+	\begin{step}
+		$m = 3$.
+	\end{step}
+
+	In the case where $m = 3$, then it immediately follows that $G$ contains an element of order 3 since $m$ is the order of $a$ by definition!
+
+	\begin{step}
+		$m = 9$.
+	\end{step}
+
+	Assuming now that $m = 9$, then by definition of order $m = 9$ is the smallest positive integer satisfying $a^{m} = 1$. So, letting $x \coloneq a^{3}$ (for reasons which will soon become apparent), we therefore have that:
+
+	\begin{align*}
+		x^{3} &= (a^{3})^{3} &&\text{(By definition of $x$)} \\
+		&= a^{9} &&\text{(By exponent laws)} \\
+		&= 1 &&\text{(By definition of order, and since $\ord{a} = m = 9$)} \\
+	\end{align*}
+
+	Now since $x$ and $x^{2}$ both cannot equal the identity (because if either of them did, then one of $a^{3}$ or $a^{6}$ would equal the identity, thereby contradicting our assumption that $\ord{a} = m = 9$), we have that $n = 3$ is the smallest positive integer satisfying $x^{3} = 1$. \\
+
+	Thus, by definition of order, $\ord{x} = 3$, and since $x$ belongs to $G$ by virtue of the fact $G$'s a group and so must be closed under the group operation, $G$ contains an element of order 3. \\
+
+	Therefore, since when $m = 3$, $G$ contains an element of order 3, we now need to consider the last possible case.
+
+	\begin{step}
+		$m = 27$.
+	\end{step}
+
+	Mimicking the approach we used for case \textbf{(III)}, assuming that $m = 27$ and letting $x \coloneq a^{9}$, we have that:
+
+	\begin{align*}
+		x^{3} &= (a^{3})^{3} &&\text{(By definition of $x$)} \\
+		&= a^{27} &&\text{(By exponent laws)} \\
+		&= 1 &&\text{(By definition of order, and since $\ord{a} = m = 27$)} \\
+	\end{align*}
+
+	This implies that the order of $x$ is 3 since, by the same logic argued before, $\ord{x}$ being any other number would necessarily contradict our assumption that $\ord{a} = m = 3$. \\
+
+	Thus, since $x \in G$ is an element of order 3, $G$ contains an element of order 3 in this case as well. \\\\
+
+	Therefore, since cases \textbf{(II)}, \textbf{(III)}, and \textbf{(IV)} all imply that $G$ has an element of order 3, and since case \textbf{(I)} cannot actually happen, $G$ \underline{must} have an element of order 3, and the statement is proven. \\
 \end{solution}
 
+%FIX: 1.2
 \begin{subproblem}
 	Let $G$ be a group of even order. Prove that $G$ has an odd number of elements of order $2$.
 \end{subproblem}
 
 \begin{solution}
-
+	To show that
 \end{solution}
 
+%FIX: 1.3
 \begin{subproblem}
 	Let $G$ be a group of order 12. Prove that $G$ has an element of order $2$.
 \end{subproblem}
@@ -197,9 +259,97 @@
 	Here we will prove a useful lemma about groups of order $2p$, where $p$ is an odd prime $--$ for example, groups of order $6, 10, 14, 22, \ldots$.
 \end{problem}
 
+%FIX: 2.1
 \begin{subproblem}
 	Let $G$ be a group, and let $a, b \in G$ be two commuting elements of order 2. Prove that the set $H = \set{1, a, b, ab}$ is a subgroup of $G$.
 \end{subproblem}
+
+%FIX: 2.2
+\begin{subproblem}
+	Let $G$ be a group of order $2p$, where $p$ is an odd prime. Prove that $G$ must have an element of order $p$.
+\end{subproblem}
+
+\begin{solution}
+
+\end{solution}
+
+%FIX: 2.3
+\begin{subproblem}
+	Combine the above steps to show that if $G$ is an abelian group of order $2p$, where $p$ is an odd prime, then $G$ is cyclic. \\
+
+	\emph{Hint:} By problems \textbf{1 (b)} and \textbf{2 (b)}, $G$ must have elements of order 2 and order $p$. Call these elements $x$ and $y$. What is the order of $xy$?
+\end{subproblem}
+
+\begin{solution}
+	
+\end{solution}
+
+\begin{problem}[The Little Class Equation]
+	The proof of Lagrange's Theorem makes clever use of equivalence relations and partitions. Here you will mimic that argument to prove the following \textbf{fresh} theorem:
+	
+	\fbox{
+		\begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+			\begin{theorem}
+				Let $G$ be a finite group and let $a \in G$. Then $|a^{G}|$ divides $|G|$.
+			\end{theorem}
+		\end{minipage}
+	}
+
+	Recall that $a^{G}$ is the conjugacy class of $a$, which consists of all elements $x \in G$ of the form $x = g^{-1}ag$ for some $g \in G$. But this $g$ may not be unique! It's possible for there to be multiple $g$'s that produce the same $x$. Thus, our argument will proceed by carefully counting the number of possible such $g$'s. \\
+
+	For the remainder of this problem, fix an element $a \in G$. For two elements $g, h \in G$, define $g \tilde h$ to mean that $g^{-1}ag = h^{-1}ah$.
+\end{problem}
+
+%FIX: 3.1
+\begin{subproblem}
+	Prove that $\tilde$ is an equivalence relation on $G$.
+\end{subproblem}
+
+\begin{solution}
+
+\end{solution}
+
+%FIX: 3.2
+\begin{subproblem}
+	Prove that the centralizer $C(a)$ is equal to the equivalence class $[1]$.
+\end{subproblem}
+
+\begin{solution}
+
+\end{solution}
+
+%FIX: 3.3
+\begin{subproblem}
+	Let $C = C(a)$, and let $g, h \in G$. Prove that $g \tilde h$ if and only if $g \equiv h \mod{C}$. Deduce the equivalence class $[g]$ is equal to the right coset $Cg$.
+\end{subproblem}
+
+\begin{solution}
+
+\end{solution}
+
+%FIX: 3.4
+\begin{subproblem}
+	Prove the \textbf{Little Class Equation}, which states that: \\
+
+	\emph{The size of the conjugacy class is equal to the index of the centralizer.}
+
+	\begin{align*}
+		[G \colon C(a)] &= |a^{G}|
+	\end{align*}
+\end{subproblem}
+
+\begin{solution}
+
+\end{solution}
+
+%FIX: 3.5
+\begin{subproblem}
+	Now prove the theorem!
+\end{subproblem}
+
+\begin{solution}
+
+\end{solution}
 
 
 
