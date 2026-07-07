@@ -243,12 +243,85 @@
 \end{subproblem}
 
 \begin{solution}
-	To show that
+	Let's let $J = \set{x \in G \colon \ord{x} = 2}$ denote the set of all elements of order 2 in $G$. Let's also let $m$ denote the cardinality of $J$, so that $m = |J|$. To prove the statement, we'll want to show that $m$ must be an odd number, which by definition of oddness, requires us to show that there exists some integer $k \in \mathbb{Z}$ such that $m = 2k - 1$.
+
+	To do this, for reasons I soon hope to make clear, we will proceed by proving that the set $H = \set{1} \sqcup J$ constitutes a subgroup of $G$. Letting $x$ and $y$ be arbitrary elements of our newly defined set $H$ (which is clearly nonempty), so long as we can demonstrate that $xy^{-1} \in H$, we can appeal to the one-line subgroup test to immediately deduce that $H$ is a subgroup of $G$. To do so, however, requires establishing a few preliminaries first:
+
+	\begin{step}
+		$y^{-1} = y$.
+	\end{step}
+
+	The first preliminary we'll seek to prove is that $y^{-1} = y$ for all $y \in H$. \\
+
+	Since $y \in H$, we know that $y$ must either be the identity element, or belong to $J$. \\
+
+	If $y$ equals the identity, then clearly $y^{-1} = y$, since $(1)(1) = 1$ by definition of the identity. \\
+	
+	If $y$ belongs to $J$ however, then by definition of $J$, we have that $y$ must be an element of order $2$ in $G$. If this is the case, then by definition of order, we know $y^{2} = 1$, which allows us to conclude that:
+
+	\begin{align*}
+		y^{2} &= 1 &&\text{(By definition of order)} \\
+		y^{-1}y^{2} &= y^{-1}(1) &&\text{(Multiplying both sides on the left by $y^{-1}$)} \\
+		y^{-1}y^{2} &= y^{-1} &&\text{(By definition of the identity)} \\
+		y^{1} &= y^{-1} &&\text{(By exponent laws)} \\
+		y &= y^{-1} &&\text{(By definition of exponentiation)} \\
+	\end{align*}
+
+	Thus, when $y \in J$, $y^{-1} = y$ as well. So because, $y^{-1} = y$ in both possible cases, this preliminary is proven.
+
+	\begin{step}
+		$x^{2} = 1$.
+	\end{step}
+
+	The second small, yet crucial, preliminary we must prove is that $x^{2} = 1$ for all $x \in H$. \\
+
+	Once again, since $x$ belongs to $H$, $x$ either equals the identity element or belongs to $J$. \\
+
+	If $x$ is the identity, then since $(x)(x) = (1)(1) = 1$ by definition of the identity, we quickly can arrive at our desired conclusion that $x^{2} = 1$. \\
+	
+	The other case isn't any harder at all. If $x \in J$, then $\ord{x} = 2$ by definition of $J$, and by definition of $J$, and by definition of order, $x^{2} = 1$ as well. \\
+
+	Thus, $x^{2} = 1$ for all $x \in H$, and since $x$ is arbitrary in $H$, this exact argument also applies to $y$, meaning $y^{2} = 1$. \\\\
+
+	Now that these two preliminaries have been established, we can see by some simple algebra that:
+
+	\begin{align*}
+		(xy^{-1})^{2} &= (xy)^{2} &&\text{(Since $y^{-1} = y$, by preliminary \textbf{(I)})} \\
+		&= y^{2}x^{2} &&\text{(By exponent laws)} \\
+		&= (1)(1) &&\text{(Since $x^{2} = 1$ and $y^{2} = 1$ by preliminary \textbf{(II)})} \\
+		&= 1 &&\text{(By definition of the identity)} \\
+	\end{align*}
+	
+	Which tells us something incredibly important; namely that $1 \le \ord{xy^{-1}} \le 2$, since $1$ is the only positive integer less than 2, and because we've demonstrated that $(xy^{-1})^{2}$ always equals the identity. \\
+
+	By our earlier logic, we know that if $\ord{xy^{-1}} = 1$, then $xy^{-1} = 1$ and if $\ord{xy^{-1}} = 2$, then $xy^{-1} \ in J$ by definition of $J$. And so, since $xy^{-1} \in \set{1} \sqcup J$, $xy^{-1} \in H$. Therefore, by the one-line subgroup test, $H$ is necessarily a subgroup of $G$. \\
+
+	By \textbf{Corollary 7.9}, we know that if $H$ contains \underline{any} order two elements, then the order of $H$ must be divisible by 2; or in other words, $|H|$ must be even. Since $|H|$ is even in this case, there must exist some integer $k \in \mathbb{Z}$ such that $|H| = 2k$. But, since $H$ is the disjoint union of $\set{1}$ and $J$, we know that $|H| = |\set{1}| + |J| = 1 + m$ by definition of $m$. \\
+
+	Putting this all together, we know that whenever $J$ is nonempty, then:
+
+	\begin{align*}
+		|H| &= 2k &&\text{(By characterization of $|H|$)} \\
+		\implies 1 + m &= 2k &&\text{(By characterization of $|H|$)} \\
+		\implies m &= 2k - 1 &&\text{(Solving for $m$)} \\
+	\end{align*}
+
+	Thus, whenever $H$ contains any elements of order $2$, the cardinality of $J$ must be an odd number, and because $J$ was defined to be the set of all elements of order 2 in $G$, $G$ must contain an odd number of order two elements in this case. \\
+
+	But isn't it possible for $J$ to be empty? No. Recall from earlier that $G$ is a group of even order. So let $n \in \mathbb{Z}$ be an integer such that $|G| = 2n$. Since $G$ must then have at least two elements, we can always pick some element $g \in G$ such that $g \neq 1$. Letting $l = \ord{g}$, we know from earlier that $l \neq 1$ since $g \neq 1$. \\
+
+	By \textbf{Corollary 7.9}, we also know $l$ must be a divisor of $2n$. Thus, we can now narrow our search down to two possible cases:
+
+	\begin{step}
+		$l$ is even.
+	\end{step}
+	
+
 \end{solution}
 
 %FIX: 1.3
 \begin{subproblem}
-	Let $G$ be a group of order 12. Prove that $G$ has an element of order $2$.
+	Let $G$ be a group of order 15. Prove that $G$ has an element of order $3$.
 \end{subproblem}
 
 \begin{solution}
