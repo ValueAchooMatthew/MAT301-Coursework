@@ -1,0 +1,773 @@
+\ifdefined\iscombined
+	\quiz{Quiz 4}
+\else
+\documentclass{article}
+\usepackage{xparse}
+\usepackage{tabularx}
+\usepackage{changepage}
+\usepackage{listings}
+\usepackage{amsthm}
+\usepackage{comment}
+\usepackage{amsmath}
+\usepackage{braket}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{sectsty}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{enumitem}
+\usetikzlibrary{arrows, arrows.meta}
+
+\date{
+	\vspace{-.75em}
+	{\large \today}
+}
+
+\title{
+	\vspace*{-1.5em}
+	{\Huge Quiz 4} \\
+	\vspace{-1em}
+	\rule{\textwidth/2}{.01em} \\
+	\vspace{-.75em}
+}
+
+\author{
+	{\large Matthew Farah}
+}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=blue,
+	citecolor=blue,
+	anchorcolor=blue
+}
+
+\fancyhead{}
+\fancyhead[L]{\today}
+\fancyhead[R]{Quiz 4}
+
+\setlength{\parindent}{0cm}
+
+\tikzset{vertex/.style = {shape = circle, draw, minimum size = 2em}}
+\tikzset{edge/.style = {-,> = latex'}}
+
+\newenvironment{solution}{
+	\vspace{.5em}
+	\par
+	\begin{adjustwidth}{1.5em}{}
+	\textbf{{Solution:}}
+	\par
+	\vspace{.5em}
+}{
+	\vspace{1em}
+	\end{adjustwidth}
+	\setcounter{step}{0}
+}
+
+\makeatother
+\makeatletter
+
+\newcounter{step}
+\renewcommand{\thestep}{\Roman{step}}
+
+\newenvironment{step}{
+	\refstepcounter{step}
+	\setcounter{substep}{0}
+	\vspace{1em}\par\noindent
+	\ignorespaces\noindent\textbf{(\thestep)}
+	\ignorespaces
+}{
+	\par
+	\vspace{1.5em}
+}
+
+\newcounter{substep}
+\renewcommand{\thesubstep}{\alph{substep}}
+
+\newenvironment{substep}{
+	\refstepcounter{substep}
+	\vspace{1em}\par\noindent
+	\ignorespaces\noindent\textbf{(\thesubstep)}
+	\ignorespaces
+}{
+	\par
+	\vspace{1.5em}
+}
+
+
+\newcounter{problem}
+\renewcommand{\theproblem}{\arabic{problem}}
+
+\newenvironment{problem}[1][]{
+	\newpage
+	\refstepcounter{problem}
+	\setcounter{subproblem}{0}
+	\vspace{.5em}\par\noindent
+	\begin{adjustwidth}{1.5em}{}
+	\noindent\textbf{Problem \theproblem: }\noindent\textit{#1}
+	\par
+	\phantomsection
+	\addcontentsline{toc}{section}{\protect{\large{Problem \theproblem}}}
+}{
+	\vspace{.5em}
+	\end{adjustwidth}
+}
+
+\newcounter{subproblem}
+\renewcommand{\thesubproblem}{\alph{subproblem}}
+
+\newenvironment{subproblem}{
+	\setcounter{step}{0}
+	\refstepcounter{subproblem}
+	\phantomsection
+	\addcontentsline{toc}{subsection}{\protect{\large{(\thesubproblem)}}}
+	\begin{adjustwidth}{1.5em}{}
+	\noindent{\textbf{(\thesubproblem) }}\ignorespaces
+}{
+	\par
+	\vspace{.5em}
+	\end{adjustwidth}
+}
+
+\newcounter{lemma}
+\renewcommand{\thelemma}{\arabic{lemma}}
+
+\newenvironment{lemma}[1][]{
+	\refstepcounter{lemma}
+	\vspace{1em}\par\noindent
+	\noindent\textbf{Lemma ({#1}): }\noindent\ignorespaces
+}{
+	\vspace{.5em}
+}
+
+\newcounter{proposition}
+\renewcommand{\theproposition}{\arabic{proposition}}
+
+\newenvironment{proposition}{
+	\refstepcounter{proposition}
+	\vspace{1em}\par\noindent
+	\noindent\textbf{Proposition: }\noindent\ignorespaces
+}{
+	\vspace{.5em}
+}
+
+\newcommand{\supp}[1]{\text{supp}({#1})}
+\newcommand{\ord}[1]{\text{ord}\left({#1}\right)}
+\newcommand{\gen}[1]{\left\langle {#1} \right\rangle}
+\newcommand{\lcm}[2]{\text{lcm}({#1}, {#2})}
+\newcommand{\dprod}[2]{\mathbb{Z}_{#1} \times \mathbb{Z}_{#2}}
+
+\renewcommand{\mod}[1]{\ (\text{mod} \; {#1})}
+
+\sectionfont{\fontsize{12}{12}\bfseries}
+\subsectionfont{\fontsize{10}{12}\normalfont}
+\subsubsectionfont{\fontsize{10}{12}\normalfont}
+
+\begin{document}
+
+\maketitle
+\pagestyle{fancy}
+
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+\tableofcontents
+
+\fi
+
+\newpage
+
+Please note the quiz is based on the following topics:
+\begin{itemize}
+	\item Lagrange's Theorem.
+\end{itemize}
+
+%NOTE: Problem 1
+\begin{problem}
+	Let $\sim$ be a relation on a set $S$. What criteria does $\sim$ need to satisfy to be an equivalence relation?
+\end{problem}
+
+\begin{solution}
+	For any relation, including $\sim$, to be an equivalence relation, it must satisfy all three of the following criteria:
+	\begin{enumerate}
+		\item Reflexivity.
+		\item Symmetry.
+		\item Transitivity.
+	\end{enumerate}
+\end{solution}
+
+%NOTE: Problem 2
+\begin{problem}
+	Let $G$ be a group, let $H \le G$ and let $x, y \in G$.
+\end{problem}
+
+%NOTE: Problem 2 (a)
+\begin{subproblem}
+	What is the definition of $x \equiv y \mod{H}$ used in this course?
+\end{subproblem}
+
+\begin{solution}
+	The definition of $x \equiv y \mod{H}$ we've been using so far is that $x \equiv y \mod{H}$ if:
+
+	\begin{align*}
+		yx^{-1} \in H
+	\end{align*}
+\end{solution}
+
+%NOTE: Problem 2 (b)
+\begin{subproblem}
+	What is another, equivalent, definition of $x \equiv y \mod{H}$?
+\end{subproblem}
+
+\begin{solution}
+	As stated before, we define $x \equiv y \mod{H}$ to mean:
+
+	\begin{align*}
+		yx^{-1} \in H \\
+	\end{align*}
+
+	however, recalling that $H$ is a subgroup of $G$, it must be closed under inversion. Thus, $yx^{-1} \in H$ if and only if $(yx^{-1})^{-1} \in H$. So, since:
+
+	\begin{align*}
+		& \qquad \qquad yx^{-1} \in H &&\text{(By definition of $x \equiv y \mod{H}$)} \\
+		&\iff (yx^{-1})^{-1} \in H &&\text{(By closure of $H$ under inversion)} \\
+		&\iff (x^{-1})^{-1}y^{-1} \in H &&\text{(By exponent laws)} \\
+		&\iff xy^{-1} &&\text{(By exponent laws)} \\
+	\end{align*}
+
+	Thus, $x \equiv y \mod{H}$ can be equivalently defined as meaning $xy^{-1} \in H$! \\\\
+
+	As an aside, we also could have arrived at this conclusion by leveraging the fact that congruence modulo $H$ forms partitions its domain! \\
+
+	Since congruence modulo $H$ is an equivalence relation, we know it must be symmetric, and by definition of symmetry, we know $x \equiv y \mod{H}$ if and only if $y \equiv x \mod{H}$. So, since $y \equiv x \mod{H}$, we know $xy^{-1} \in H$ (by our usual definition of congruence modulo $H$). \\
+
+	Putting all of this together, we have that $x \equiv y \mod{H}$ if and only if $xy^{-1} \in H$, which means $xy^{-1} \in H$ would be an alternative definition for $x$ being congruent to $y$ modulo $H$.
+\end{solution}
+
+%NOTE: Problem 3
+\begin{problem}
+	Let $G$ be a group, let $H$ be a subgroup of $G$, and let $\equiv$ denote congruence modulo $H$. In each case, determine if the given congruence is correct.
+\end{problem}
+
+%NOTE: Problem 3 (a)
+\begin{subproblem}
+	Let $G = D_{4}$ and $H = \gen{r}$. Then $r \equiv s \mod{H}$ \\
+	\emph{Note: $r = (1234)$ and $s = (13)$.}
+\end{subproblem}
+
+\begin{solution}
+	This congruence is incorrect. \\
+
+	To see why, we'll show that $sr^{-1} \not\in H$. To do that, we'll very quickly compute $H$. \\
+
+	We know $H$ is just the subgroup generated by $r$. Since $r$ is a permutation of order 4, we have that:
+
+	\begin{align*}
+		H &= \set{r^{0}, r^{1}, r^{2}, r^{3}} \\
+	\end{align*}
+
+	Or alternatively, since $r = (1234)$:
+
+	\begin{align*}
+		H &= \set{(1234)^{0}, (1234)^{1}, (1234)^{2}, (1234)^{3}} \\
+		&= \set{(), (1234), (13)(24), (1432)} \\
+	\end{align*}
+
+	And because:
+
+	\begin{align*}
+		sr^{-1} &= (13)(1234)^{-1} \\
+		&= (13)(4321) \\
+		&= (14)(23) \\
+	\end{align*}
+
+	$sr^{-1} \not\in H$ and so $r \not\equiv s \mod{H}$, by definition of congruence modulo $H$.
+\end{solution}
+
+%NOTE: Problem 3 (b)
+\begin{subproblem}
+	Let $G = GL_{2}(\mathbb{R})$ and $H = SL_{2}(\mathbb{R})$. Then $\begin{pmatrix} 2 & 1 \\ 0 & 2 \end{pmatrix} \equiv \begin{pmatrix} 1 & 3 \\ 1 & 1 \end{pmatrix} \mod{H}$.
+\end{subproblem}
+
+\begin{solution}
+	This congruence is also incorrect. \\
+
+	For $\begin{pmatrix} 2 & 1 \\ 0 & 2 \end{pmatrix}$ to be congruent to $\begin{pmatrix} 1 & 3 \\ 1 & 1 \end{pmatrix}$ modulo $H$, it must be the case that $\begin{pmatrix} 1 & 3 \\ 1 & 1 \end{pmatrix}\begin{pmatrix} 1 & 1 \\ 0 & 2 \end{pmatrix}^{-1} \in H$. But since:
+
+	\begin{align*}
+		\begin{pmatrix}
+			1 & 1 \\
+			0 & 2
+		\end{pmatrix}
+		&= \frac{1}{(2)(1) - (1)(0)}
+		\begin{pmatrix}
+			2 & -1 \\
+			0 & 1
+		\end{pmatrix}
+		&&\text{(By definition of inverse)} \\\\
+		&= \frac{1}{2}\begin{pmatrix}
+			2 & -1 \\
+			0 & 1
+		\end{pmatrix}
+		&&\text{(Simplifying)} \\\\
+		&= \begin{pmatrix}
+			1 & -1/2 \\
+			0 & -1/2
+		\end{pmatrix}
+		&&\text{(Simplifying)} \\\\
+	\end{align*}
+
+	We have that:
+
+	\begin{align*}
+		\begin{pmatrix}
+			1 & 3 \\
+			1 & 1
+		\end{pmatrix}
+		\begin{pmatrix}
+			1 & 1 \\
+			0 & 2
+		\end{pmatrix}^{-1}
+		&= \begin{pmatrix}
+			1 & 3 \\
+			1 & 1
+		\end{pmatrix}
+		\begin{pmatrix}
+			1 & -1/2 \\
+			0 & -1/2
+		\end{pmatrix}
+		&&\text{(Substituting)} \\\\
+		&= \begin{pmatrix}
+			1 & 1 \\
+			1 & 0
+		\end{pmatrix}
+		&&\text{(Simplifying)} \\\\
+	\end{align*}
+
+	Whose determinant is given by:
+
+	\begin{align*}
+		\det\left(\begin{pmatrix}
+			1 & 1 \\
+			1 & 0
+		\end{pmatrix}\right)
+		&= (1)(0) - (1)(1)  &&\text{(By definition of determinant)} \\\\
+		&= 0 - 1 &&\text{(Simplifying)} \\\\
+		&= -1 &&\text{(Simplifying)} \\\\
+	\end{align*}
+
+	And thus, $\begin{pmatrix} 1 & 3 \\ 1 & 1 \end{pmatrix}\begin{pmatrix} 1 & 1 \\ 0 & 2 \end{pmatrix}^{-1} = \begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix}$ cannot belong to $SL_{2}(\mathbb{R})$, since $\det\left( \begin{pmatrix} 1 & 1 \\ 1 & 0 \end{pmatrix} \right) = -1 \neq 1$, and $SL_{2}(\mathbb{R})$ only contains matrices with a determinant of 1, by definition. \\
+
+	Hence, $\begin{pmatrix} 1 & 3 \\ 1 & 1 \end{pmatrix}\begin{pmatrix} 1 & 1 \\ 0 & 2 \end{pmatrix}^{-1} \not\in H$, and so $ \begin{pmatrix} 1 & 1 \\ 0 & 2 \end{pmatrix}$ isn't congruent to $\begin{pmatrix} 1 & 3 \\ 1 & 1 \end{pmatrix}$ modulo $H$.
+\end{solution}
+
+%NOTE: Problem 3 (c)
+\begin{subproblem}
+	Let $G = GL_{2}(\mathbb{R})$ and $H = SL_{2}(\mathbb{R})$. Then $\begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix} \equiv \begin{pmatrix} 1 & 1 \\ 0 & 3 \end{pmatrix} \mod{H}$.
+\end{subproblem}
+
+\begin{solution}
+	This congruence is actually correct! \\
+
+	As stated before, we know that $\begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix} \equiv \begin{pmatrix} 1 & 1 \\ 0 & 3 \end{pmatrix}$ if $\begin{pmatrix} 1 & 1 \\ 0 & 3 \end{pmatrix}\begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}^{-1} \in H$. And because:
+
+	\begin{align*}
+		\begin{pmatrix}
+			2 & 1 \\
+			1 & 2
+		\end{pmatrix}
+		&= \frac{1}{(2)(2) - (1)(1)}
+		\begin{pmatrix}
+			2 & -1 \\
+			-1 & 2
+		\end{pmatrix}
+		&&\text{(By definition of inverse)} \\\\
+		&= \frac{1}{3}\begin{pmatrix}
+			2 & -1 \\
+			-1 & 2
+		\end{pmatrix}
+		&&\text{(Simplifying)} \\\\
+		&= \begin{pmatrix}
+			2/3 & -1/3 \\
+			-1/3 & -2/3
+		\end{pmatrix}
+		&&\text{(Simplifying)} \\\\
+	\end{align*}
+
+	We have that:
+
+	\begin{align*}
+		\begin{pmatrix}
+			1 & 1 \\
+			0 & 3
+		\end{pmatrix}
+		\begin{pmatrix}
+			2 & 1 \\
+			1 & 2
+		\end{pmatrix}^{-1}
+		&= \begin{pmatrix}
+			1 & 1 \\
+			0 & 3
+		\end{pmatrix}
+		\begin{pmatrix}
+			2/3 & -1/3 \\
+			-1/3 & 2/3
+		\end{pmatrix}
+		&&\text{(Substituting)} \\\\
+		&= \begin{pmatrix}
+			1/3 & 1/3 \\
+			-1 & 2
+		\end{pmatrix}
+		&&\text{(Simplifying)} \\\\
+	\end{align*}
+
+	And since:
+
+	\begin{align*}
+		\det\left(\begin{pmatrix}
+			1/3 & 1/3 \\
+			-1 & 2
+		\end{pmatrix}\right)
+		&= \left(\frac{1}{3}\right)(2) - \left( \frac{1}{3} \right)(-1) &&\text{(By definition of determinant)} \\\\
+		&= \frac{2}{3} + \frac{1}{3} &&\text{(Simplifying)} \\\\
+		&= 1 &&\text{(Simplifying)} \\\\
+	\end{align*}
+
+	We have that $\begin{pmatrix} 1 & 1 \\ 0 & 3 \end{pmatrix}\begin{pmatrix} 2 & 1 \\ 1 &2 \end{pmatrix}^{-1} = \begin{pmatrix} 1/3 & 1/3 \\ -1 & 2 \end{pmatrix}$ belongs to $SL_{2}(\mathbb{R})$ since $\det\left( \begin{pmatrix} 1/3 & 1/3 \\ -1 & 2 \end{pmatrix} \right) = 1$, and $SL_{2}(\mathbb{R})$ is the set of all $2 \times 2$ matrices with a determinant of 1 and all real entries, by definition. \\
+
+	Hence, $\begin{pmatrix} 1 & 1 \\ 0 & 3 \end{pmatrix}\begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}^{-1} \in H$, and so $\begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$ is congruent to $\begin{pmatrix} 1 & 1 \\ 1 & 3 \end{pmatrix}$ modulo $H$.
+\end{solution}
+
+%NOTE: Problem 3 (d)
+\begin{subproblem}
+	Let $G = S_{5}$ and $H = A_{5}$. Then $(123) \equiv (4125) \mod{H}$.
+\end{subproblem}
+
+\begin{solution}
+	This congruence isn't true. \\
+
+	To see why, recall that $(123)$ is congruent to $(4125)$ modulo $H$ if $(4125)(123)^{-1} \in H$. But:
+
+	\begin{align*}
+		(4125)(123)^{-1} &= (4125)(321) &&\text{(Simplifying)} \\
+		&= (1354) &&\text{(Simplifying)} \\
+	\end{align*}
+
+	Which is an odd permutation, since we can express it as the composition of an odd number of length two cycles, like so:
+
+	\begin{align*}
+		(1354) &= (13)(35)(1354) \\
+	\end{align*}
+
+	And so $(4125)(123)^{-1} = (1354)$ doesn't belong to $A_{5}$, since $A_{5}$ is the set of all even permutations in $S_{5}$ definitionally. \\
+
+	Thus, since $(4125)(123)^{-1} \not\in H$, $(123)$ isn't congruent to $(4125)$ modulo $H$.
+\end{solution}
+
+%NOTE: Problem 3 (e)
+\begin{subproblem}
+	Let $G = S_{5}$ and $H = A_{5}$. Then $(31)(423) \equiv (2314) \mod{H}$.
+\end{subproblem}
+
+\begin{solution}
+	This congruence is correct. \\
+
+	Firstly, we can simplify the permutation on the left as follows:
+
+	\begin{align*}
+		(31)(423) &= (1342) \\
+	\end{align*}
+
+	Meaning we can consider whether or not $(1342)$ is congruent to $(2314)$ modulo $H$ instead! And since:
+
+	\begin{align*}
+		(2314)(1342)^{-1} &= (2314)(2431) &&\text{(Simplifying)} \\
+		&= (134) &&\text{(Simplifying)} \\
+	\end{align*}
+
+	And since $(134)$ is expressible by:
+
+	\begin{align*}
+		(134) &= (13)(34) \\
+	\end{align*}
+
+	We know that $(134)$ is an even permutation, and so $(2314)((31)(423))^{-1} = (2314)(1342)^{-1} = (134) \in A_{5}$, since $A_{5}$ is the set of all even permutations in $S_{5}$ by definition. \\
+
+	Thus, since $(2314)((31)(423))^{-1} \in H$, we have that $(31)(423)$ is congruent to $(2314)$ modulo $H$.
+\end{solution}
+
+%NOTE: Problem 4
+\begin{problem}
+	Let $G$ be a group and let $g$ be an element of order 4 and $x$ be an element of order 5. Let $H = \gen{x}$. How many elements are in the right coset $Hg$?
+\end{problem}
+
+\begin{solution}
+	There are exactly 5 elements in the right coset $Hg$. \\
+
+	We'll use two different approaches to show this is the case: one by brute force and one appealing to a handful of pretty powerful theorems. \\
+
+	\begin{step}
+		The brute force approach.
+	\end{step}
+
+	Starting with the brute force approach, we know that the subgroup generated by $x$ is representable by the set $\set{1, x, x^{2}, x^{3}, x^{4}}$, since $x$ is an element of order five in $G$. Because $H = \gen{x}$, we therefore have that: \\
+
+	\begin{align*}
+		H &= \set{u1, x, x^{2}, x^{3}, x^{4}} \\
+	\end{align*}
+
+	Now, letting $g \in G$, we know by definition of right cosets that:
+
+	\begin{align*}
+		Hg &= \set{hg \colon h \in H} &&\text{(By definition of right cosets)} \\
+		&= \set{(1)g, xg, x^{2}g, x^{3}g, x^{4}g} &&\text{(By iterating over every element in $H$)} \\
+		&= \set{g, xg, x^{2}g, x^{3}g, x^{4}g} &&\text{(By definition of the identity)} \\
+	\end{align*}
+
+	And thus, $Hg$ has 5 elements.
+
+	\begin{step}
+		The argumentative approach.
+	\end{step}
+
+	Recall that, whatever the cardinality of $Hg$ is, it must equal the cardinality of $H$ by \textbf{Proposition 7.7}. So, finding the number of elements in $Hg$ can be reduced down to just finding the cardinality of $H$! \\
+
+	By \textbf{Corollary 4.4}, we know that $\ord{x} = |\gen{x}|$, meaning that the order of $x$ equals the order of the subgroup generated by $x$. The problem gives us that $x$ is an element of order five, so we have that $|\gen{x}| = 5$, and since $H = \gen{5}$, we have that $|H| = 5$ as well! \\
+
+	Thus, since $|H| = |Hg|$ as stated earlier, we can therefore conclude that the right coset $Hg$ has 5 elements in it.
+\end{solution}
+
+%NOTE: Problem 5
+\begin{problem}
+	Which bijection is used in the proof of \textbf{Proposition 7.7} from the \textbf{Chapter 7} readings?
+\end{problem}
+
+\begin{solution}
+	The bijection used to prove \textbf{Proposition 7.7} was $f(x) = xa$.
+\end{solution}
+
+%NOTE: Problem 6
+\begin{problem}
+	Fill in the blanks to complete Lagrange's Theorem. \\
+
+	Let $G$ be \underline{\hspace{2em}}, and let $H$ be \underline{\hspace{2em}} of $G$. Then $|H|$ \underline{\hspace{2em}} $|G|$.
+\end{problem}
+
+\begin{solution}
+	Let $G$ be \underline{a finite group}, and let $H$ be \underline{a subgroup of $G$}. Then $|H|$ \underline{is a divisor of} $|G|$.
+\end{solution}
+
+%NOTE: Problem 7
+\begin{problem}
+	Let $G$ be a group of order 20. Which of the following statements are necessarily true?
+\end{problem}
+
+%NOTE: Problem 7 (a)
+\begin{subproblem}
+	$G$ has an element of order 4.
+\end{subproblem}
+
+\begin{solution}
+	This statement is \underline{not} necessarily true. \\
+
+	The statement likely comes from a misunderstanding of \textbf{Corollary 7.9}, which states that if $x$ is an element of order $n$ in a group of finite order $G$, then $n$ divides $|G|$. Although \textbf{Corollary 7.9} is, of course, true, it does \underline{not} imply that $G$ must contain an element of the same order of each and every of its divisors. \\
+
+	To give a concrete example that $G$ doesn't always have an element of order 4, consider the group $\dprod{10}{2}$, which is a group 0f order 20 which happens not to contain an element of order 4. \\
+
+	Verifying that $\dprod{10}{2}$ is indeed a group of order 20 is a relatively trivial endeavour, since:
+
+	\begin{align*}
+		|\dprod{10}{2}| &= |\mathbb{Z}_{10}||\mathbb{Z}_{2}| \\
+		&= (10)(2) \\
+		&= 20 \\
+	\end{align*}
+
+	Seeing that it doesn't contain an element of order 4, however, is slightly trickier. For $\dprod{10}{2}$ to have an element of order 4, then there would need to exist some $(x, y) \in \dprod{10}{2}$ such that $n = 4$ is the smallest positive integer satisfying:
+
+	\begin{align*}
+		n(x, y) &= (0, 0) \\
+	\end{align*}
+
+	by definition of order, and the fact $\dprod{10}{2}$ is an abelian group. By definition of the direct product, the equality above necessarily implies that:
+
+	\begin{align*}
+		(4x, 4y) &= (0, 0) \\
+	\end{align*}
+
+	By doing a lil' brute force action here, we can see that the only elements in $\mathbb{Z}_{10}$ satisfying $4x = 0$ would be $x = 0$ and $x = 5$, since:
+
+	\vspace{2em}
+
+	\begin{tabularx}{\linewidth}{Y Y}
+		$(4)(0) \equiv 0 \mod{10}$ & $(4)(5) \equiv 0 \mod{10}$ \\
+		$(4)(1) \equiv 4 \mod{10}$ & $(4)(6) \equiv 4 \mod{10}$ \\
+		$(4)(2) \equiv 8 \mod{10}$ & $(4)(7) \equiv 8 \mod{10}$ \\
+		$(4)(3) \equiv 2 \mod{10}$ & $(4)(8) \equiv 2 \mod{10}$ \\
+		$(4)(4) \equiv 6 \mod{10}$ & $(4)(9) \equiv 6 \mod{10}$ \\
+	\end{tabularx}
+
+	\vspace{2em}
+
+	In $\mathbb{Z}_{2}$ on the other hand, both $y = 0$ and $y = 1$ work, since:
+
+	\vspace{2em}
+
+	\begin{tabularx}{\linewidth}{Y Y}
+		$(4)(0) \equiv 0 \mod{2}$ & $(4)(1) \equiv 0 \mod{2}$ \\
+	\end{tabularx}
+
+	\vspace{2em}
+
+	And so, the only possible candidates for an order 4 element in $\dprod{10}{2}$ are $(0, 0), (0, 1), (5, 0)$, and $(5, 1)$. But because:
+
+	\begin{align*}
+		(1)(0, 0) &= ((1)(0), (1)(0)) &&\text{(By definition of direct product)} \\
+		&= (0, 0) &&\text{(Simplifying)} \\\\\
+		(2)(0, 1) &= ((2)(0), (2)(1)) &&\text{(By definition of direct product)} \\
+		&= (0, 0) &&\text{(Simplifying)} \\\\\
+		(2)(5, 0) &= ((5)(0), (2)(0)) &&\text{(By definition of direct product)} \\
+		&= (0, 0) &&\text{(Simplifying)} \\\\\
+		(2)(5, 1) &= ((2)(5), (2)(1)) &&\text{(By definition of direct product)} \\
+		&= (0, 0) &&\text{(Simplifying)} \\\\\
+	\end{align*}
+
+	that means \underline{none} of our candidates actually do have an order of 4, since in each case, there exists some integer smaller than 4 which, when multiplied, yields the group's identity. \\
+
+	Therefore, $\dprod{10}{2}$ has no element of order 4 and is thus an example of a group of order 20 without such an element.
+\end{solution}
+
+%NOTE: Problem 7 (b)
+\begin{subproblem}
+	$G$ has a subgroup of order 7.
+\end{subproblem}
+
+\begin{solution}
+	This statement is always false, and quite easy to disprove at that. \\
+
+	By Lagrange's Theorem, we know that if $H \le G$ is a subgroup of $G$, then $|H|$ divides $|G|$. However, the order of $G$ is given to be 20, and 7 isn't a divisor of 20. Thus, by the contrapositive, since any subset of $G$ with exactly 7 elements would have a cardinality which isn't a divisor of $|G|$, no such subset can possible by a subgroup of $G$.
+\end{solution}
+
+%NOTE: Problem 7 (c)
+\begin{subproblem}
+	$G$ does not have a subgroup of index 6.
+\end{subproblem}
+
+\begin{solution}
+	This statement is actually true! \\
+
+	Let $H \le G$ be an arbitrary subgroup of $G$. Recall that the index of $H$ in $G$ is defined to be $|G / H|$. By \textbf{Corollary 7.8}, since $G$ is a group of finite order, we know $|G / H| = \frac{G}{H} = \frac{20}{H}$. \\
+
+	Thus, for the index of $H$ in $G$ to be 6, $H$ would need to satisfy:
+
+	\begin{align*}
+		\frac{20}{|H|} &= 6 \\
+		\implies |H| &= \frac{20}{6} \\
+		\implies |H| &= \frac{10}{3} \\
+	\end{align*}
+
+	Which is clearly impossible, since any group of finite order only has an integer-valued cardinality. \\
+
+	Thus, no subgroup of $G$ can possibly have an index of 6.
+\end{solution}
+
+%FIX: Problem 7 (d)
+\begin{subproblem}
+	$G$ has a subgroup of order 4.
+\end{subproblem}
+
+\begin{solution}
+	This claim is not necessarily true. \\
+\end{solution}
+
+%NOTE: Problem 7 (e)
+\begin{subproblem}
+	$G$ does not have an element of order 6.
+\end{subproblem}
+
+\begin{solution}
+	The proof of this, once again, follows quickly from \textbf{Corollary 7.9}. \textbf{Corollary 7.9} tells us that $|G|$, which is 20, must be divisible by the order of all of its elements. Since 6 isn't a divisor of $|G|$, the contrapositive of \textbf{Corollary 7.9} tells us that no element of order 6 can belong to $G$.
+\end{solution}
+
+%NOTE: Problem 7 (f)
+\begin{subproblem}
+	$G$ has a nontrivial cyclic subgroup.
+\end{subproblem}
+
+\begin{solution}
+	This is actually always the case! \\
+
+	This simply comes from the fact that, since $G$ is a group of order 20, it must have an element in it that isn't just the identity. Letting $x \in (G \set minus \set{1})$ be any arbitrary such element, we know that:
+
+	\begin{enumerate}
+		\item $\gen{x}$ is a subgroup of $G$, since $x \in G$.
+		\item $\gen{x}$ is cyclic, since it is generated by $x$.
+		\item $\gen{x}$ is nontrivial, since $x \in \gen{x}$ and $x \neq 1$ by definition.
+	\end{enumerate}
+
+	Thus, since we can always find some nontrivial cyclic subgroup of any group of order 20, the claim holds.
+\end{solution}
+
+%FIX: Problem 7 (g)
+\begin{subproblem}
+	$G$ is cyclic.
+\end{subproblem}
+
+\begin{solution}
+	This statement is false.
+\end{solution}
+
+%NOTE: Problem 8
+\begin{problem}
+	Find $[S_{7} \colon D_{7}]$.
+\end{problem}
+
+\begin{solution}
+	$[S_{7} \colon D_{7}] = 360$. \\
+
+	To see how we can arrive at this number, recall that $|S_{n}| = n!$ and $D_{k} = 2k$ for all integers $n$ and $k \in \mathbb{Z}$. Thus, $|S_{7}| = 7! = 5040$ and $|D_{7}| = (2)(7) = 14$. Therefore:
+
+	\begin{align*}
+		[S_{7} \colon D_{7}] &= |S_{7} / D_{7}| &&\text{(By definition of index)} \\
+		&= \frac{|S_{7}|}{|D_{7}|} &&\text{(By \textbf{Corollary 7.8})} \\
+		&= \frac{5040}{14} &&\text{(Substituting)} \\
+		&= 360 &&\text{(Simplifying)}
+	\end{align*}
+\end{solution}
+
+%NOTE: Problem 9
+\begin{problem}
+	In the group $S_{4}$, let $\sigma = (132)$. What does $[S_{4} \colon \gen{\sigma}]$ equal?
+\end{problem}
+
+\begin{solution}
+	$[S_{4} \colon \gen{\sigma}] = 8$. \\
+
+	Here's why. We know that $\sigma = (132)$ is an element of order 3 in $S_{4}$ because:
+
+	\begin{align*}
+		(132)^{1} &= (132) \\
+		(132)^{2} &= (123) \\
+		(132)^{3} &= () \\
+	\end{align*}
+
+	We know then, by \textbf{Corollary 4.4}, that $|\gen{\sigma}|$ must equal 3 as well. And since $S_{4}$ is evidently a finite group since $|S_{4}| = 4! = 24$, we can call on \textbf{Corollary 7.8} to conclude that:
+
+	\begin{align*}
+		[S_{4} \colon \gen{\sigma}] &= |S_{4} / \gen{\sigma}| &&\text{(By definition of index)} \\
+		&= \frac{|S_{4}|}{|\gen{\sigma}|} &&\text{(By \textbf{Corollary 7.8})} \\
+		&= \frac{24}{3} &&\text{(Substituting)} \\
+		&= 8 &&\text{(Simplifying)}
+	\end{align*}
+\end{solution}
+
+\ifdefined\iscombined
+	\newpage
+\else
+	\end{document}
+\fi
